@@ -160,7 +160,9 @@ function createCardElement(item) {
 }
 
 function handleQuickAction(itemId) {
-  alert(`Resolve action triggered for Item ID: ${itemId}`);
+  const index = rawInventory.findIndex(i => i.id === itemId);
+  if (index > -1) rawInventory.splice(index, 1);
+  renderDashboard();
 }
 
 // Initial Render
