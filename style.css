@@ -5,10 +5,16 @@
   --text-muted: #64748b;
   --border: #e2e8f0;
   
-  --badge-both-bg: #fef2f2;
-  --badge-both-text: #991b1b;
+  /* Tier 1 - Critical / Action Required */
+  --badge-critical-bg: #fef2f2;
+  --badge-critical-text: #991b1b;
+  --badge-critical-border: #fecaca;
+  
+  /* Tier 2 - Expiring Soon */
   --badge-expiry-bg: #fff7ed;
   --badge-expiry-text: #9a3412;
+  
+  /* Tier 3 - Low Stock */
   --badge-stock-bg: #fefce8;
   --badge-stock-text: #854d0e;
 }
@@ -30,7 +36,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 600px;
+  max-width: 620px;
 }
 
 header {
@@ -47,14 +53,45 @@ p.subtitle {
   font-size: 0.9rem;
 }
 
-/* Alert List Container */
-.alert-list {
+.dashboard {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.75rem;
 }
 
-/* Card Component */
+/* Section Formatting */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-title.critical {
+  color: #dc2626;
+}
+
+.section-title.warning {
+  color: #d97706;
+}
+
+/* Card List */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Standard Card */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -63,7 +100,13 @@ p.subtitle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+/* Tier 1 Critical Card Styling */
+.card-critical {
+  border-color: var(--badge-critical-border);
+  background-color: #fff5f5;
 }
 
 .card-info {
@@ -93,9 +136,9 @@ p.subtitle {
   letter-spacing: 0.03em;
 }
 
-.badge-BOTH {
-  background-color: var(--badge-both-bg);
-  color: var(--badge-both-text);
+.badge-BOTH, .badge-EXPIRED {
+  background-color: var(--badge-critical-bg);
+  color: var(--badge-critical-text);
 }
 
 .badge-EXPIRING_SOON {
@@ -108,7 +151,7 @@ p.subtitle {
   color: var(--badge-stock-text);
 }
 
-/* Details Text */
+/* Metadata Text */
 .meta-text {
   font-size: 0.85rem;
   color: var(--text-muted);
@@ -125,13 +168,33 @@ p.subtitle {
   color: #ffffff;
   border: none;
   border-radius: 6px;
-  padding: 0.5rem 0.85rem;
+  padding: 0.55rem 0.9rem;
   font-size: 0.825rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
 .action-btn:hover {
   background: #334155;
+}
+
+/* Empty State */
+.empty-state {
+  background: var(--card-bg);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.empty-state h3 {
+  font-size: 1.1rem;
+  color: #166534;
+  margin-bottom: 0.25rem;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
