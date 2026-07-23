@@ -1,200 +1,321 @@
+/* ----------------------------------------------------
+   1. Design Tokens & Global CSS Variables
+   ---------------------------------------------------- */
 :root {
-  --bg: #f8fafc;
-  --card-bg: #ffffff;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   
-  /* Tier 1 - Critical / Action Required */
-  --badge-critical-bg: #fef2f2;
-  --badge-critical-text: #991b1b;
-  --badge-critical-border: #fecaca;
+  /* Color System */
+  --bg-main: #f4f6f9;
+  --surface-card: #ffffff;
+  --text-primary: #1a202c;
+  --text-muted: #718096;
+  --border-subtle: #e2e8f0;
   
-  /* Tier 2 - Expiring Soon */
-  --badge-expiry-bg: #fff7ed;
-  --badge-expiry-text: #9a3412;
+  /* Status Colors */
+  --critical-color: #e53e3e;
+  --critical-bg: #fff5f5;
+  --critical-border: #feb2b2;
   
-  /* Tier 3 - Low Stock */
-  --badge-stock-bg: #fefce8;
-  --badge-stock-text: #854d0e;
+  --warning-color: #dd6b20;
+  --warning-bg: #fffaf0;
+  --warning-border: #fbd38d;
+  
+  --healthy-color: #38a169;
+  --healthy-bg: #f0fff4;
+  --healthy-border: #9ae6b4;
+
+  --accent-blue: #3182ce;
+  --accent-blue-hover: #2b6cb0;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.5;
+  padding: 2rem 1rem;
 }
 
-.container {
-  width: 100%;
-  max-width: 620px;
+/* ----------------------------------------------------
+   2. Layout Container
+   ---------------------------------------------------- */
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-header {
-  margin-bottom: 1.5rem;
+.app-header {
+  margin-bottom: 2rem;
 }
 
-h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
+.app-header h1 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
 }
 
-p.subtitle {
+.app-header p {
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
+/* ----------------------------------------------------
+   3. Clickable Summary Metrics Bar
+   ---------------------------------------------------- */
+.metrics-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-/* Section Formatting */
-.section {
-  display: flex;
-  flex-direction: column;
+.metric-card {
+  background: var(--surface-card);
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+}
+
+.metric-card.active {
+  box-shadow: 0 0 0 2px var(--accent-blue);
+  background-color: #ffffff;
+}
+
+.metric-card.critical { border-left: 5px solid var(--critical-color); }
+.metric-card.warning  { border-left: 5px solid var(--warning-color); }
+.metric-card.healthy  { border-left: 5px solid var(--healthy-color); }
+
+.metric-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1.2;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* ----------------------------------------------------
+   4. Add Item Form
+   ---------------------------------------------------- */
+.form-section {
+  background: var(--surface-card);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  margin-bottom: 2rem;
+}
+
+.form-section h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.item-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr auto;
   gap: 0.75rem;
 }
 
+.item-form input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background-color: #f8fafc;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.item-form input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  background-color: #ffffff;
+}
+
+.add-btn {
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.add-btn:hover {
+  background: var(--accent-blue-hover);
+}
+
+/* ----------------------------------------------------
+   5. Dashboard & Card Styling
+   ---------------------------------------------------- */
+.section {
+  margin-bottom: 2rem;
+}
+
 .section-title {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.section-title.critical {
-  color: #dc2626;
-}
+.section-title.critical { color: var(--critical-color); }
+.section-title.warning  { color: var(--warning-color); }
+.section-title.healthy  { color: var(--healthy-color); }
 
-.section-title.warning {
-  color: #d97706;
-}
-
-/* Card List */
 .card-list {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-/* Standard Card */
 .card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  background: var(--surface-card);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
   padding: 1rem 1.25rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  justify-content: space-between;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Tier 1 Critical Card Styling */
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
 .card-critical {
-  border-color: var(--badge-critical-border);
-  background-color: #fff5f5;
-}
-
-.card-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  background: var(--critical-bg);
+  border-color: var(--critical-border);
 }
 
 .card-header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
 }
 
 .item-name {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.05rem;
+}
+
+.meta-text {
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
 /* Status Badges */
 .badge {
-  font-size: 0.725rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 
-.badge-BOTH, .badge-EXPIRED {
-  background-color: var(--badge-critical-bg);
-  color: var(--badge-critical-text);
+.badge-EXPIRED, .badge-BOTH {
+  background-color: #fed7d7;
+  color: #9b2c2c;
 }
 
 .badge-EXPIRING_SOON {
-  background-color: var(--badge-expiry-bg);
-  color: var(--badge-expiry-text);
+  background-color: #feebc8;
+  color: #9c4221;
 }
 
 .badge-LOW_STOCK {
-  background-color: var(--badge-stock-bg);
-  color: var(--badge-stock-text);
+  background-color: #feebc8;
+  color: #9c4221;
 }
 
-/* Metadata Text */
-.meta-text {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.badge-HEALTHY {
+  background-color: #c6f6d5;
+  color: #22543d;
 }
 
-.meta-text span {
-  font-weight: 600;
-  color: var(--text);
-}
-
-/* Quick Action Button */
+/* Resolve Action Button */
 .action-btn {
-  background: #0f172a;
-  color: #ffffff;
-  border: none;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
   border-radius: 6px;
-  padding: 0.55rem 0.9rem;
-  font-size: 0.825rem;
   font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .action-btn:hover {
-  background: #334155;
+  background: #edf2f7;
+  border-color: #cbd5e0;
 }
 
 /* Empty State */
 .empty-state {
-  background: var(--card-bg);
-  border: 1px dashed var(--border);
-  border-radius: 8px;
-  padding: 3rem 1.5rem;
   text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--surface-card);
+  border-radius: 12px;
+  border: 2px dashed var(--border-subtle);
 }
 
 .empty-state h3 {
-  font-size: 1.1rem;
-  color: #166534;
+  font-size: 1.15rem;
+  color: var(--healthy-color);
   margin-bottom: 0.25rem;
 }
 
 .empty-state p {
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+/* Responsive Grid for Form on Mobile */
+@media (max-width: 640px) {
+  .item-form {
+    grid-template-columns: 1fr;
+  }
+  
+  .metrics-bar {
+    grid-template-columns: 1fr;
+  }
 }
