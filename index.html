@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FreshStock - Priority Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1>Priority Dashboard</h1>
-      <p class="subtitle">Automated inventory risk management</p>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>FreshStock 📦⚡</h1>
+      <p>Automated Inventory Risk Management for FreshRoute</p>
     </header>
 
-    <!-- Priority Dashboard Sections -->
-    <div id="dashboard" class="dashboard">
-      <!-- Injected dynamically by script.js -->
-    </div>
+    <!-- 1. Clickable Summary Metrics -->
+    <div id="metrics-bar" class="metrics-bar"></div>
+
+    <!-- 2. Add New Item Form -->
+    <section class="form-section">
+      <h2>Add New Inventory Item</h2>
+      <form id="add-item-form" class="item-form">
+        <input type="text" id="item-name" placeholder="Item Name (e.g. Whole Milk)" required>
+        <input type="number" id="item-qty" placeholder="Current Qty" min="0" required>
+        <input type="number" id="item-min" placeholder="Min Qty" min="0" required>
+        <input type="date" id="item-exp" required>
+        <button type="submit" class="add-btn">+ Add Item</button>
+      </form>
+    </section>
+
+    <!-- 3. Dynamic Priority Dashboard -->
+    <main id="dashboard" class="dashboard"></main>
   </div>
 
   <script src="script.js"></script>
