@@ -117,7 +117,65 @@ body {
 }
 
 /* ----------------------------------------------------
-   4. Add Item Form
+   4. Bulk CSV Upload Zone
+   ---------------------------------------------------- */
+.upload-section {
+  background: var(--surface-card);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  margin-bottom: 1.5rem;
+}
+
+.upload-section h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.drop-zone {
+  border: 2px dashed var(--border-subtle);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.drop-zone.drag-over {
+  border-color: var(--accent-blue);
+  background-color: #ebf8ff;
+}
+
+.drop-icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  color: var(--accent-blue);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.upload-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* ----------------------------------------------------
+   5. Add Item Form
    ---------------------------------------------------- */
 .form-section {
   background: var(--surface-card);
@@ -176,7 +234,7 @@ body {
 }
 
 /* ----------------------------------------------------
-   5. Dashboard & Card Styling
+   6. Dashboard & Card Styling
    ---------------------------------------------------- */
 .section {
   margin-bottom: 2rem;
@@ -309,7 +367,7 @@ body {
   font-size: 0.9rem;
 }
 
-/* Responsive Grid for Form on Mobile */
+/* Responsive Grid for Mobile Screens */
 @media (max-width: 640px) {
   .item-form {
     grid-template-columns: 1fr;

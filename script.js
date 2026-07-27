@@ -11,93 +11,95 @@ function getOffsetDate(daysOffset) {
 // ----------------------------------------------------
 // 1. Dynamic FreshRoute Inventory Dataset (80 SKUs)
 // ----------------------------------------------------
-const defaultInventory = [
-  // --- TIER 1: CRITICAL (EXPIRED / BOTH) ---
-  { id: 101, name: "Valley Whole Milk 1 Gal", quantity: 8, minQuantity: 45, expirationDate: getOffsetDate(-2) }, // Expired + Low
-  { id: 103, name: "Valley 2% Reduced Fat Milk 1 Gal", quantity: 5, minQuantity: 50, expirationDate: getOffsetDate(-1) }, // Expired
-  { id: 113, name: "Valley Heavy Cream 40% Quart", quantity: 12, minQuantity: 30, expirationDate: getOffsetDate(0) }, // Expires Today
-  { id: 208, name: "Northwood Peach Yogurt 6oz (12pk)", quantity: 4, minQuantity: 10, expirationDate: getOffsetDate(-3) },
-  { id: 307, name: "Great Lakes Shredded Mozzarella 5lb", quantity: 2, minQuantity: 18, expirationDate: getOffsetDate(1) }, // Expiring + Low
+function getInitialDataset() {
+  return [
+    // --- TIER 1: CRITICAL ALERTS ---
+    { id: 101, name: "Valley Whole Milk 1 Gal", quantity: 8, minQuantity: 45, expirationDate: getOffsetDate(-2) },
+    { id: 103, name: "Valley 2% Reduced Fat Milk 1 Gal", quantity: 5, minQuantity: 50, expirationDate: getOffsetDate(-1) },
+    { id: 113, name: "Valley Heavy Cream 40% Quart", quantity: 12, minQuantity: 30, expirationDate: getOffsetDate(0) },
+    { id: 208, name: "Northwood Peach Yogurt 6oz (12pk)", quantity: 4, minQuantity: 10, expirationDate: getOffsetDate(-3) },
+    { id: 307, name: "Great Lakes Shredded Mozzarella 5lb", quantity: 2, minQuantity: 18, expirationDate: getOffsetDate(1) },
+    { id: 604, name: "Midwest Eggnog 1/2 Gal", quantity: 1, minQuantity: 5, expirationDate: getOffsetDate(-5) },
 
-  // --- TIER 2 & 3: WARNINGS (EXPIRING SOON / LOW STOCK) ---
-  { id: 102, name: "Valley Whole Milk 1/2 Gal", quantity: 60, minQuantity: 30, expirationDate: getOffsetDate(3) }, // Expiring soon
-  { id: 105, name: "Valley 1% Lowfat Milk 1 Gal", quantity: 10, minQuantity: 35, expirationDate: getOffsetDate(12) }, // Low stock
-  { id: 115, name: "Chef's Select Cream 5 Gal Bag", quantity: 3, minQuantity: 8, expirationDate: getOffsetDate(5) }, // Expiring soon
-  { id: 117, name: "Valley Half & Half Pint", quantity: 8, minQuantity: 25, expirationDate: getOffsetDate(15) }, // Low stock
-  { id: 201, name: "Hills Farm Plain Greek Yogurt 32oz", quantity: 6, minQuantity: 20, expirationDate: getOffsetDate(4) }, // Expiring soon
-  { id: 204, name: "Hills Farm Blueberry Greek Yogurt 5.3oz", quantity: 2, minQuantity: 10, expirationDate: getOffsetDate(6) },
-  { id: 303, name: "Wisconsin Shredded Cheddar 5lb Bag", quantity: 4, minQuantity: 20, expirationDate: getOffsetDate(20) }, // Low stock
-  { id: 310, name: "Midwest Shredded Pepper Jack 5lb Bag", quantity: 6, minQuantity: 12, expirationDate: getOffsetDate(4) },
-  { id: 501, name: "Valley Grade A Sour Cream 5lb Tub", quantity: 7, minQuantity: 15, expirationDate: getOffsetDate(5) },
-  { id: 504, name: "Midwest French Onion Dip 16oz", quantity: 3, minQuantity: 20, expirationDate: getOffsetDate(2) },
+    // --- TIER 2 & 3: WARNINGS ---
+    { id: 102, name: "Valley Whole Milk 1/2 Gal", quantity: 60, minQuantity: 30, expirationDate: getOffsetDate(3) },
+    { id: 105, name: "Valley 1% Lowfat Milk 1 Gal", quantity: 10, minQuantity: 35, expirationDate: getOffsetDate(12) },
+    { id: 115, name: "Chef's Select Cream 5 Gal Bag", quantity: 3, minQuantity: 8, expirationDate: getOffsetDate(5) },
+    { id: 117, name: "Valley Half & Half Pint", quantity: 8, minQuantity: 25, expirationDate: getOffsetDate(15) },
+    { id: 201, name: "Hills Farm Plain Greek Yogurt 32oz", quantity: 6, minQuantity: 20, expirationDate: getOffsetDate(4) },
+    { id: 204, name: "Hills Farm Blueberry Greek Yogurt", quantity: 2, minQuantity: 10, expirationDate: getOffsetDate(6) },
+    { id: 303, name: "Wisconsin Shredded Cheddar 5lb Bag", quantity: 4, minQuantity: 20, expirationDate: getOffsetDate(20) },
+    { id: 310, name: "Midwest Shredded Pepper Jack 5lb", quantity: 6, minQuantity: 12, expirationDate: getOffsetDate(4) },
+    { id: 501, name: "Valley Grade A Sour Cream 5lb Tub", quantity: 7, minQuantity: 15, expirationDate: getOffsetDate(5) },
+    { id: 504, name: "Midwest French Onion Dip 16oz", quantity: 3, minQuantity: 20, expirationDate: getOffsetDate(2) },
 
-  // --- HEALTHY STOCK (TIER 4) ---
-  { id: 104, name: "Valley 2% Reduced Fat Milk 1/2 Gal", quantity: 35, minQuantity: 25, expirationDate: getOffsetDate(14) },
-  { id: 106, name: "Valley Skim Fat Free Milk 1 Gal", quantity: 25, minQuantity: 20, expirationDate: getOffsetDate(18) },
-  { id: 107, name: "Prairie Organic Whole Milk 1/2 Gal", quantity: 30, minQuantity: 15, expirationDate: getOffsetDate(16) },
-  { id: 108, name: "Prairie Organic 2% Milk 1/2 Gal", quantity: 22, minQuantity: 15, expirationDate: getOffsetDate(22) },
-  { id: 109, name: "Midwest Dairy Chocolate Milk Quart", quantity: 40, minQuantity: 20, expirationDate: "2026-08-15" },
-  { id: 111, name: "Great Lakes Lactose-Free Whole Milk", quantity: 18, minQuantity: 12, expirationDate: getOffsetDate(30) },
-  { id: 114, name: "Valley Heavy Cream 40% Pint", quantity: 28, minQuantity: 20, expirationDate: getOffsetDate(25) },
-  { id: 116, name: "Valley Half & Half Quart", quantity: 50, minQuantity: 40, expirationDate: getOffsetDate(20) },
-  { id: 118, name: "Prairie Organic Half & Half Pint", quantity: 19, minQuantity: 15, expirationDate: getOffsetDate(28) },
-  { id: 120, name: "Midwest Cultured Buttermilk 1/2 Gal", quantity: 16, minQuantity: 10, expirationDate: getOffsetDate(35) },
-  { id: 202, name: "Hills Farm Vanilla Greek Yogurt 32oz", quantity: 24, minQuantity: 20, expirationDate: getOffsetDate(30) },
-  { id: 203, name: "Hills Farm Honey Greek Yogurt (12pk)", quantity: 15, minQuantity: 10, expirationDate: getOffsetDate(40) },
-  { id: 205, name: "Hills Farm Strawberry Greek Yogurt", quantity: 18, minQuantity: 10, expirationDate: getOffsetDate(42) },
-  { id: 206, name: "Northwood Organic Whole Milk Yogurt", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(25) },
-  { id: 207, name: "Northwood Organic Vanilla Yogurt", quantity: 19, minQuantity: 15, expirationDate: getOffsetDate(26) },
-  { id: 209, name: "Northwood Black Cherry Yogurt (12pk)", quantity: 12, minQuantity: 8, expirationDate: getOffsetDate(32) },
-  { id: 210, name: "DairyLand Lowfat Probiotic Kefir", quantity: 14, minQuantity: 12, expirationDate: getOffsetDate(30) },
-  { id: 212, name: "DairyLand Probiotic Kefir Strawberry", quantity: 11, minQuantity: 12, expirationDate: getOffsetDate(29) },
-  { id: 301, name: "Wisconsin Sharp Cheddar Block 10lb", quantity: 14, minQuantity: 10, expirationDate: getOffsetDate(60) },
-  { id: 302, name: "Wisconsin Mild Cheddar Block 10lb", quantity: 22, minQuantity: 15, expirationDate: getOffsetDate(70) },
-  { id: 304, name: "Wisconsin Sliced Cheddar 1.5lb Tray", quantity: 30, minQuantity: 15, expirationDate: getOffsetDate(45) },
-  { id: 305, name: "Heritage Aged Reserve Cheddar 8oz", quantity: 45, minQuantity: 25, expirationDate: getOffsetDate(90) },
-  { id: 306, name: "Great Lakes Whole Milk Mozzarella", quantity: 18, minQuantity: 12, expirationDate: getOffsetDate(30) },
-  { id: 308, name: "Great Lakes Fresh Mozzarella Log", quantity: 20, minQuantity: 15, expirationDate: getOffsetDate(22) },
-  { id: 309, name: "Midwest Colby Jack Block 5lb", quantity: 16, minQuantity: 10, expirationDate: getOffsetDate(60) },
-  { id: 311, name: "Midwest Sliced Swiss Cheese 1.5lb", quantity: 13, minQuantity: 10, expirationDate: getOffsetDate(40) },
-  { id: 312, name: "Artisanal Smoked Gouda Wheel 5lb", quantity: 7, minQuantity: 5, expirationDate: getOffsetDate(80) },
-  { id: 313, name: "Artisanal Havarti with Dill 8oz", quantity: 20, minQuantity: 15, expirationDate: getOffsetDate(50) },
-  { id: 315, name: "Valley Cream Cheese Tub 8oz", quantity: 35, minQuantity: 20, expirationDate: getOffsetDate(40) },
-  { id: 317, name: "Prairie Farm Lowfat Cottage Cheese", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(25) },
-  { id: 318, name: "Artisanal Crumbled Feta Tub 2.5lb", quantity: 11, minQuantity: 8, expirationDate: getOffsetDate(45) },
-  { id: 320, name: "Great Lakes Grated Parmesan 5lb Tub", quantity: 15, minQuantity: 8, expirationDate: getOffsetDate(100) },
-  { id: 401, name: "Midwest Farm Salted Butter Foil 1lb", quantity: 85, minQuantity: 50, expirationDate: getOffsetDate(90) },
-  { id: 402, name: "Midwest Farm Unsalted Butter Foil 1lb", quantity: 48, minQuantity: 40, expirationDate: getOffsetDate(85) },
-  { id: 404, name: "Heritage Cultured European Butter", quantity: 32, minQuantity: 20, expirationDate: getOffsetDate(75) },
-  { id: 406, name: "Valley Whipped Butter Tub 12oz", quantity: 22, minQuantity: 15, expirationDate: getOffsetDate(60) },
-  { id: 502, name: "Valley Grade A Sour Cream 16oz Tub", quantity: 48, minQuantity: 30, expirationDate: getOffsetDate(35) },
-  { id: 503, name: "Valley Light Sour Cream 16oz Tub", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(30) },
-  { id: 505, name: "Midwest Ranch Dip 16oz", quantity: 25, minQuantity: 20, expirationDate: getOffsetDate(28) },
-  { id: 601, name: "Valley Organic Whole Milk Ricotta", quantity: 16, minQuantity: 12, expirationDate: getOffsetDate(20) },
-  { id: 603, name: "Great Lakes Ice Cream Mix Chocolate", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(25) },
-  { id: 605, name: "Valley Sweetened Condensed Milk", quantity: 100, minQuantity: 30, expirationDate: getOffsetDate(180) },
-  { id: 606, name: "Valley Evaporated Milk 12oz Can", quantity: 85, minQuantity: 30, expirationDate: getOffsetDate(200) },
-  { id: 701, name: "Wisconsin Aged Swiss Wheel 15lb", quantity: 40, minQuantity: 10, expirationDate: getOffsetDate(120) },
-  { id: 702, name: "Valley Ultra-Pasteurized Milk 1/2 Gal", quantity: 95, minQuantity: 30, expirationDate: getOffsetDate(45) },
-  { id: 703, name: "Midwest Clarified Ghee 13oz Jar", quantity: 60, minQuantity: 15, expirationDate: getOffsetDate(250) },
-  { id: 704, name: "Heritage Grass-Fed Salted Butter", quantity: 50, minQuantity: 20, expirationDate: getOffsetDate(90) },
-  { id: 705, name: "Northwood Organic Plain Yogurt 5lb", quantity: 30, minQuantity: 10, expirationDate: getOffsetDate(30) },
-  { id: 706, name: "Valley Real Whipped Cream 14oz", quantity: 72, minQuantity: 25, expirationDate: getOffsetDate(60) },
-  { id: 707, name: "Wisconsin Provolone Cheese Log", quantity: 28, minQuantity: 8, expirationDate: getOffsetDate(80) },
-  { id: 708, name: "Great Lakes String Cheese 1oz (24pk)", quantity: 65, minQuantity: 20, expirationDate: getOffsetDate(50) },
-  { id: 709, name: "DairyLand Organic Chocolate Milk", quantity: 42, minQuantity: 15, expirationDate: getOffsetDate(35) },
-  { id: 710, name: "Chef's Select Unsalted Butter 1lb Case", quantity: 18, minQuantity: 5, expirationDate: getOffsetDate(90) },
-  { id: 711, name: "Midwest Sharp Cheddar Slices 2.5lb", quantity: 34, minQuantity: 12, expirationDate: getOffsetDate(65) },
-  { id: 712, name: "Valley Organic Whole Milk Quart", quantity: 55, minQuantity: 20, expirationDate: getOffsetDate(22) },
-  { id: 713, name: "Hills Farm Strawberry Greek Yogurt", quantity: 28, minQuantity: 10, expirationDate: getOffsetDate(30) },
-  { id: 714, name: "Great Lakes Monterey Jack Block", quantity: 22, minQuantity: 8, expirationDate: getOffsetDate(75) },
-  { id: 715, name: "Artisanal Goat Cheese Log 11oz", quantity: 19, minQuantity: 6, expirationDate: getOffsetDate(40) },
-  { id: 716, name: "Wisconsin Sharp White Cheddar 8oz", quantity: 80, minQuantity: 25, expirationDate: getOffsetDate(110) },
-  { id: 717, name: "Valley Condensed Skim Milk 5 Gal", quantity: 12, minQuantity: 4, expirationDate: getOffsetDate(20) }
-];
+    // --- HEALTHY STOCK ---
+    { id: 104, name: "Valley 2% Reduced Fat Milk 1/2 Gal", quantity: 35, minQuantity: 25, expirationDate: getOffsetDate(14) },
+    { id: 106, name: "Valley Skim Fat Free Milk 1 Gal", quantity: 25, minQuantity: 20, expirationDate: getOffsetDate(18) },
+    { id: 107, name: "Prairie Organic Whole Milk 1/2 Gal", quantity: 30, minQuantity: 15, expirationDate: getOffsetDate(16) },
+    { id: 108, name: "Prairie Organic 2% Milk 1/2 Gal", quantity: 22, minQuantity: 15, expirationDate: getOffsetDate(22) },
+    { id: 109, name: "Midwest Dairy Chocolate Milk Quart", quantity: 40, minQuantity: 20, expirationDate: getOffsetDate(25) },
+    { id: 111, name: "Great Lakes Lactose-Free Whole Milk", quantity: 18, minQuantity: 12, expirationDate: getOffsetDate(30) },
+    { id: 114, name: "Valley Heavy Cream 40% Pint", quantity: 28, minQuantity: 20, expirationDate: getOffsetDate(25) },
+    { id: 116, name: "Valley Half & Half Quart", quantity: 50, minQuantity: 40, expirationDate: getOffsetDate(20) },
+    { id: 118, name: "Prairie Organic Half & Half Pint", quantity: 19, minQuantity: 15, expirationDate: getOffsetDate(28) },
+    { id: 120, name: "Midwest Cultured Buttermilk 1/2 Gal", quantity: 16, minQuantity: 10, expirationDate: getOffsetDate(35) },
+    { id: 202, name: "Hills Farm Vanilla Greek Yogurt 32oz", quantity: 24, minQuantity: 20, expirationDate: getOffsetDate(30) },
+    { id: 203, name: "Hills Farm Honey Greek Yogurt (12pk)", quantity: 15, minQuantity: 10, expirationDate: getOffsetDate(40) },
+    { id: 205, name: "Hills Farm Strawberry Greek Yogurt", quantity: 18, minQuantity: 10, expirationDate: getOffsetDate(42) },
+    { id: 206, name: "Northwood Organic Whole Milk Yogurt", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(25) },
+    { id: 207, name: "Northwood Organic Vanilla Yogurt", quantity: 19, minQuantity: 15, expirationDate: getOffsetDate(26) },
+    { id: 209, name: "Northwood Black Cherry Yogurt (12pk)", quantity: 12, minQuantity: 8, expirationDate: getOffsetDate(32) },
+    { id: 210, name: "DairyLand Lowfat Probiotic Kefir", quantity: 14, minQuantity: 12, expirationDate: getOffsetDate(30) },
+    { id: 212, name: "DairyLand Probiotic Kefir Strawberry", quantity: 11, minQuantity: 12, expirationDate: getOffsetDate(29) },
+    { id: 301, name: "Wisconsin Sharp Cheddar Block 10lb", quantity: 14, minQuantity: 10, expirationDate: getOffsetDate(60) },
+    { id: 302, name: "Wisconsin Mild Cheddar Block 10lb", quantity: 22, minQuantity: 15, expirationDate: getOffsetDate(70) },
+    { id: 304, name: "Wisconsin Sliced Cheddar 1.5lb Tray", quantity: 30, minQuantity: 15, expirationDate: getOffsetDate(45) },
+    { id: 305, name: "Heritage Aged Reserve Cheddar 8oz", quantity: 45, minQuantity: 25, expirationDate: getOffsetDate(90) },
+    { id: 306, name: "Great Lakes Whole Milk Mozzarella", quantity: 18, minQuantity: 12, expirationDate: getOffsetDate(30) },
+    { id: 308, name: "Great Lakes Fresh Mozzarella Log", quantity: 20, minQuantity: 15, expirationDate: getOffsetDate(22) },
+    { id: 309, name: "Midwest Colby Jack Block 5lb", quantity: 16, minQuantity: 10, expirationDate: getOffsetDate(60) },
+    { id: 311, name: "Midwest Sliced Swiss Cheese 1.5lb", quantity: 13, minQuantity: 10, expirationDate: getOffsetDate(40) },
+    { id: 312, name: "Artisanal Smoked Gouda Wheel 5lb", quantity: 7, minQuantity: 5, expirationDate: getOffsetDate(80) },
+    { id: 313, name: "Artisanal Havarti with Dill 8oz", quantity: 20, minQuantity: 15, expirationDate: getOffsetDate(50) },
+    { id: 315, name: "Valley Cream Cheese Tub 8oz", quantity: 35, minQuantity: 20, expirationDate: getOffsetDate(40) },
+    { id: 317, name: "Prairie Farm Lowfat Cottage Cheese", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(25) },
+    { id: 318, name: "Artisanal Crumbled Feta Tub 2.5lb", quantity: 11, minQuantity: 8, expirationDate: getOffsetDate(45) },
+    { id: 320, name: "Great Lakes Grated Parmesan 5lb Tub", quantity: 15, minQuantity: 8, expirationDate: getOffsetDate(100) },
+    { id: 401, name: "Midwest Farm Salted Butter Foil 1lb", quantity: 85, minQuantity: 50, expirationDate: getOffsetDate(90) },
+    { id: 402, name: "Midwest Farm Unsalted Butter Foil 1lb", quantity: 48, minQuantity: 40, expirationDate: getOffsetDate(85) },
+    { id: 404, name: "Heritage Cultured European Butter", quantity: 32, minQuantity: 20, expirationDate: getOffsetDate(75) },
+    { id: 406, name: "Valley Whipped Butter Tub 12oz", quantity: 22, minQuantity: 15, expirationDate: getOffsetDate(60) },
+    { id: 502, name: "Valley Grade A Sour Cream 16oz Tub", quantity: 48, minQuantity: 30, expirationDate: getOffsetDate(35) },
+    { id: 503, name: "Valley Light Sour Cream 16oz Tub", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(30) },
+    { id: 505, name: "Midwest Ranch Dip 16oz", quantity: 25, minQuantity: 20, expirationDate: getOffsetDate(28) },
+    { id: 601, name: "Valley Organic Whole Milk Ricotta", quantity: 16, minQuantity: 12, expirationDate: getOffsetDate(20) },
+    { id: 603, name: "Great Lakes Ice Cream Mix Chocolate", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(25) },
+    { id: 605, name: "Valley Sweetened Condensed Milk", quantity: 100, minQuantity: 30, expirationDate: getOffsetDate(180) },
+    { id: 606, name: "Valley Evaporated Milk 12oz Can", quantity: 85, minQuantity: 30, expirationDate: getOffsetDate(200) },
+    { id: 701, name: "Wisconsin Aged Swiss Wheel 15lb", quantity: 40, minQuantity: 10, expirationDate: getOffsetDate(120) },
+    { id: 702, name: "Valley Ultra-Pasteurized Milk 1/2 Gal", quantity: 95, minQuantity: 30, expirationDate: getOffsetDate(45) },
+    { id: 703, name: "Midwest Clarified Ghee 13oz Jar", quantity: 60, minQuantity: 15, expirationDate: getOffsetDate(250) },
+    { id: 704, name: "Heritage Grass-Fed Salted Butter", quantity: 50, minQuantity: 20, expirationDate: getOffsetDate(90) },
+    { id: 705, name: "Northwood Organic Plain Yogurt 5lb", quantity: 30, minQuantity: 10, expirationDate: getOffsetDate(30) },
+    { id: 706, name: "Valley Real Whipped Cream 14oz", quantity: 72, minQuantity: 25, expirationDate: getOffsetDate(60) },
+    { id: 707, name: "Wisconsin Provolone Cheese Log", quantity: 28, minQuantity: 8, expirationDate: getOffsetDate(80) },
+    { id: 708, name: "Great Lakes String Cheese 1oz (24pk)", quantity: 65, minQuantity: 20, expirationDate: getOffsetDate(50) },
+    { id: 709, name: "DairyLand Organic Chocolate Milk", quantity: 42, minQuantity: 15, expirationDate: getOffsetDate(35) },
+    { id: 710, name: "Chef's Select Unsalted Butter 1lb Case", quantity: 18, minQuantity: 5, expirationDate: getOffsetDate(90) },
+    { id: 711, name: "Midwest Sharp Cheddar Slices 2.5lb", quantity: 34, minQuantity: 12, expirationDate: getOffsetDate(65) },
+    { id: 712, name: "Valley Organic Whole Milk Quart", quantity: 55, minQuantity: 20, expirationDate: getOffsetDate(22) },
+    { id: 713, name: "Hills Farm Strawberry Greek Yogurt", quantity: 28, minQuantity: 10, expirationDate: getOffsetDate(30) },
+    { id: 714, name: "Great Lakes Monterey Jack Block", quantity: 22, minQuantity: 8, expirationDate: getOffsetDate(75) },
+    { id: 715, name: "Artisanal Goat Cheese Log 11oz", quantity: 19, minQuantity: 6, expirationDate: getOffsetDate(40) },
+    { id: 716, name: "Wisconsin Sharp White Cheddar 8oz", quantity: 80, minQuantity: 25, expirationDate: getOffsetDate(110) },
+    { id: 717, name: "Valley Condensed Skim Milk 5 Gal", quantity: 12, minQuantity: 4, expirationDate: getOffsetDate(20) }
+  ];
+}
 
-// ALWAYS reset localStorage to clear out hardcoded old dates
-localStorage.setItem('freshstock_inventory', JSON.stringify(defaultInventory));
+let savedInventory = JSON.parse(localStorage.getItem('freshstock_inventory'));
+let rawInventory = (savedInventory && savedInventory.length > 0) ? savedInventory : getInitialDataset();
 
-let rawInventory = defaultInventory;
 let currentFilter = 'all';
 
 function saveToLocalStorage() {
@@ -313,7 +315,7 @@ function createCardElement(item) {
 }
 
 // ----------------------------------------------------
-// 5. Handlers: Resolve & Add Item
+// 5. Handlers: Resolve & Add Single Item
 // ----------------------------------------------------
 function handleQuickAction(itemId) {
   rawInventory = rawInventory.filter(item => item.id !== itemId);
@@ -338,6 +340,109 @@ document.getElementById('add-item-form').addEventListener('submit', function(e) 
 
   this.reset();
 });
+
+// ----------------------------------------------------
+// 6. CSV File Upload & Parsing Engine
+// ----------------------------------------------------
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('csv-file-input');
+
+if (dropZone && fileInput) {
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    }, false);
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+    }, false);
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    if (files.length > 0) handleCSVFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) handleCSVFile(e.target.files[0]);
+  });
+}
+
+function handleCSVFile(file) {
+  if (!file.name.endsWith('.csv')) {
+    alert('Please upload a valid .csv file.');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    parseAndImportCSV(text);
+  };
+  reader.readAsText(file);
+}
+
+function parseAndImportCSV(csvText) {
+  const lines = csvText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+  if (lines.length < 2) {
+    alert('CSV file appears to be empty or missing headers.');
+    return;
+  }
+
+  // Parse header row dynamically
+  const headers = lines[0].split(',').map(h => h.replace(/["']/g, '').trim().toLowerCase());
+  
+  const nameIdx = headers.indexOf('name');
+  const qtyIdx = headers.indexOf('quantity');
+  const minIdx = headers.indexOf('minquantity');
+  const expIdx = headers.indexOf('expirationdate');
+
+  if (nameIdx === -1 || qtyIdx === -1 || minIdx === -1 || expIdx === -1) {
+    alert('Invalid CSV header format. File must contain columns: name, quantity, minQuantity, expirationDate');
+    return;
+  }
+
+  const newItems = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const row = lines[i].split(',').map(cell => cell.replace(/["']/g, '').trim());
+    if (row.length < headers.length) continue;
+
+    const name = row[nameIdx];
+    const quantity = Number(row[qtyIdx]);
+    const minQuantity = Number(row[minIdx]);
+    const expirationDate = row[expIdx];
+
+    if (name && !isNaN(quantity) && !isNaN(minQuantity) && expirationDate) {
+      newItems.push({
+        id: Date.now() + i,
+        name,
+        quantity,
+        minQuantity,
+        expirationDate
+      });
+    }
+  }
+
+  if (newItems.length === 0) {
+    alert('No valid inventory rows found in the CSV.');
+    return;
+  }
+
+  rawInventory = [...newItems, ...rawInventory];
+  saveToLocalStorage();
+  renderDashboard();
+
+  alert(`Successfully imported ${newItems.length} inventory items!`);
+  fileInput.value = '';
+}
 
 // Initial Render
 renderDashboard();

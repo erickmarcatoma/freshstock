@@ -17,7 +17,18 @@
     <!-- 1. Clickable Summary Metrics -->
     <div id="metrics-bar" class="metrics-bar"></div>
 
-    <!-- 2. Add New Item Form -->
+    <!-- 2. Bulk CSV File Upload Section -->
+    <section class="upload-section">
+      <h2>Bulk Import Inventory</h2>
+      <div id="drop-zone" class="drop-zone">
+        <span class="drop-icon">📁</span>
+        <p>Drag & drop your inventory <strong>.csv</strong> file here, or <label for="csv-file-input" class="file-label">browse</label></p>
+        <input type="file" id="csv-file-input" accept=".csv" class="file-input">
+      </div>
+      <p class="upload-hint">Expected columns: <code>name, quantity, minQuantity, expirationDate</code> (YYYY-MM-DD)</p>
+    </section>
+
+    <!-- 3. Add Single Item Form -->
     <section class="form-section">
       <h2>Add New Inventory Item</h2>
       <form id="add-item-form" class="item-form">
@@ -29,7 +40,7 @@
       </form>
     </section>
 
-    <!-- 3. Dynamic Priority Dashboard -->
+    <!-- 4. Dynamic Priority Dashboard -->
     <main id="dashboard" class="dashboard"></main>
   </div>
 
