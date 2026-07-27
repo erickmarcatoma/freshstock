@@ -52,6 +52,7 @@ body {
 
 .app-header {
   margin-bottom: 2rem;
+<<<<<<< HEAD
 }
 
 .app-header h1 {
@@ -186,6 +187,84 @@ body {
   margin-bottom: 2rem;
 }
 
+=======
+}
+
+.app-header h1 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.app-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ----------------------------------------------------
+   3. Clickable Summary Metrics Bar
+   ---------------------------------------------------- */
+.metrics-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: var(--surface-card);
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+}
+
+.metric-card.active {
+  box-shadow: 0 0 0 2px var(--accent-blue);
+  background-color: #ffffff;
+}
+
+.metric-card.critical { border-left: 5px solid var(--critical-color); }
+.metric-card.warning  { border-left: 5px solid var(--warning-color); }
+.metric-card.healthy  { border-left: 5px solid var(--healthy-color); }
+
+.metric-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1.2;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* ----------------------------------------------------
+   4. Add Item Form
+   ---------------------------------------------------- */
+.form-section {
+  background: var(--surface-card);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  margin-bottom: 2rem;
+}
+
+>>>>>>> 9157446387a940e81bd6c642fe71a7695c4e69c9
 .form-section h2 {
   font-size: 1rem;
   font-weight: 700;
@@ -234,7 +313,11 @@ body {
 }
 
 /* ----------------------------------------------------
+<<<<<<< HEAD
    6. Dashboard & Card Styling
+=======
+   5. Dashboard & Card Styling
+>>>>>>> 9157446387a940e81bd6c642fe71a7695c4e69c9
    ---------------------------------------------------- */
 .section {
   margin-bottom: 2rem;
@@ -367,7 +450,11 @@ body {
   font-size: 0.9rem;
 }
 
+<<<<<<< HEAD
 /* Responsive Grid for Mobile Screens */
+=======
+/* Responsive Grid for Form on Mobile */
+>>>>>>> 9157446387a940e81bd6c642fe71a7695c4e69c9
 @media (max-width: 640px) {
   .item-form {
     grid-template-columns: 1fr;
@@ -376,4 +463,8 @@ body {
   .metrics-bar {
     grid-template-columns: 1fr;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9157446387a940e81bd6c642fe71a7695c4e69c9
