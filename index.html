@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FreshStock - Priority Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreshStock - Smart Inventory Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <div class="app-container">
+  <div class="container">
     <header class="app-header">
-      <h1>FreshStock 📦⚡</h1>
-      <p>Automated Inventory Risk Management for FreshRoute</p>
+      <h1>FreshStock Dashboard</h1>
+      <p class="subtitle">Real-time dairy inventory monitoring & alert engine</p>
     </header>
 
-    <!-- 1. Clickable Summary Metrics -->
-    <div id="metrics-bar" class="metrics-bar"></div>
+    <!-- Metrics Bar (Clickable Filters) -->
+    <section id="metrics-bar" class="metrics-bar"></section>
 
-    <!-- 2. Bulk CSV File Upload Section -->
+    <!-- CSV Upload & Remove Zone -->
     <section class="upload-section">
-      <h2>Bulk Import Inventory</h2>
       <div id="drop-zone" class="drop-zone">
-        <span class="drop-icon">📁</span>
-        <p>Drag & drop your inventory <strong>.csv</strong> file here, or <label for="csv-file-input" class="file-label">browse</label></p>
-        <input type="file" id="csv-file-input" accept=".csv" class="file-input">
+        <p id="drop-zone-text">Drag & drop your CSV file here or <strong>click to browse</strong></p>
+        <input type="file" id="csv-file-input" accept=".csv" style="display: none;" />
+        
+        <div id="file-info" class="file-info" style="display: none;">
+          <span id="uploaded-file-name">filename.csv</span>
+          <button type="button" id="remove-file-btn" class="remove-btn">Remove CSV</button>
+        </div>
       </div>
-      <p class="upload-hint">Expected columns: <code>name, quantity, minQuantity, expirationDate</code> (YYYY-MM-DD)</p>
     </section>
 
-    <!-- 3. Add Single Item Form -->
+    <!-- Manual Item Entry Form -->
     <section class="form-section">
-      <h2>Add New Inventory Item</h2>
+      <h2>Add Inventory Item</h2>
       <form id="add-item-form" class="item-form">
-        <input type="text" id="item-name" placeholder="Item Name (e.g. Whole Milk)" required>
-        <input type="number" id="item-qty" placeholder="Current Qty" min="0" required>
-        <input type="number" id="item-min" placeholder="Min Qty" min="0" required>
-        <input type="date" id="item-exp" required>
-        <button type="submit" class="add-btn">+ Add Item</button>
+        <input type="text" id="item-name" placeholder="Product Name" required />
+        <input type="number" id="item-qty" placeholder="Quantity" step="any" required />
+        <input type="number" id="item-min" placeholder="Min Threshold" step="any" required />
+        <input type="date" id="item-exp" required />
+        <button type="submit" class="submit-btn">Add SKU</button>
       </form>
     </section>
 
-    <!-- 4. Dynamic Priority Dashboard -->
-    <main id="dashboard" class="dashboard"></main>
+    <!-- Main Inventory Cards Container -->
+    <main id="dashboard" class="dashboard-container"></main>
   </div>
 
   <script src="script.js"></script>

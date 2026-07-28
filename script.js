@@ -9,7 +9,7 @@ function getOffsetDate(daysOffset) {
 }
 
 // ----------------------------------------------------
-// 1. Dynamic FreshRoute Inventory Dataset (80 SKUs)
+// 1. Dynamic Default Inventory Dataset (Initial Fallback)
 // ----------------------------------------------------
 function getInitialDataset() {
   return [
@@ -45,61 +45,14 @@ function getInitialDataset() {
     { id: 118, name: "Prairie Organic Half & Half Pint", quantity: 19, minQuantity: 15, expirationDate: getOffsetDate(28) },
     { id: 120, name: "Midwest Cultured Buttermilk 1/2 Gal", quantity: 16, minQuantity: 10, expirationDate: getOffsetDate(35) },
     { id: 202, name: "Hills Farm Vanilla Greek Yogurt 32oz", quantity: 24, minQuantity: 20, expirationDate: getOffsetDate(30) },
-    { id: 203, name: "Hills Farm Honey Greek Yogurt (12pk)", quantity: 15, minQuantity: 10, expirationDate: getOffsetDate(40) },
-    { id: 205, name: "Hills Farm Strawberry Greek Yogurt", quantity: 18, minQuantity: 10, expirationDate: getOffsetDate(42) },
-    { id: 206, name: "Northwood Organic Whole Milk Yogurt", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(25) },
-    { id: 207, name: "Northwood Organic Vanilla Yogurt", quantity: 19, minQuantity: 15, expirationDate: getOffsetDate(26) },
-    { id: 209, name: "Northwood Black Cherry Yogurt (12pk)", quantity: 12, minQuantity: 8, expirationDate: getOffsetDate(32) },
-    { id: 210, name: "DairyLand Lowfat Probiotic Kefir", quantity: 14, minQuantity: 12, expirationDate: getOffsetDate(30) },
-    { id: 212, name: "DairyLand Probiotic Kefir Strawberry", quantity: 11, minQuantity: 12, expirationDate: getOffsetDate(29) },
     { id: 301, name: "Wisconsin Sharp Cheddar Block 10lb", quantity: 14, minQuantity: 10, expirationDate: getOffsetDate(60) },
-    { id: 302, name: "Wisconsin Mild Cheddar Block 10lb", quantity: 22, minQuantity: 15, expirationDate: getOffsetDate(70) },
-    { id: 304, name: "Wisconsin Sliced Cheddar 1.5lb Tray", quantity: 30, minQuantity: 15, expirationDate: getOffsetDate(45) },
-    { id: 305, name: "Heritage Aged Reserve Cheddar 8oz", quantity: 45, minQuantity: 25, expirationDate: getOffsetDate(90) },
-    { id: 306, name: "Great Lakes Whole Milk Mozzarella", quantity: 18, minQuantity: 12, expirationDate: getOffsetDate(30) },
-    { id: 308, name: "Great Lakes Fresh Mozzarella Log", quantity: 20, minQuantity: 15, expirationDate: getOffsetDate(22) },
-    { id: 309, name: "Midwest Colby Jack Block 5lb", quantity: 16, minQuantity: 10, expirationDate: getOffsetDate(60) },
-    { id: 311, name: "Midwest Sliced Swiss Cheese 1.5lb", quantity: 13, minQuantity: 10, expirationDate: getOffsetDate(40) },
-    { id: 312, name: "Artisanal Smoked Gouda Wheel 5lb", quantity: 7, minQuantity: 5, expirationDate: getOffsetDate(80) },
-    { id: 313, name: "Artisanal Havarti with Dill 8oz", quantity: 20, minQuantity: 15, expirationDate: getOffsetDate(50) },
-    { id: 315, name: "Valley Cream Cheese Tub 8oz", quantity: 35, minQuantity: 20, expirationDate: getOffsetDate(40) },
-    { id: 317, name: "Prairie Farm Lowfat Cottage Cheese", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(25) },
-    { id: 318, name: "Artisanal Crumbled Feta Tub 2.5lb", quantity: 11, minQuantity: 8, expirationDate: getOffsetDate(45) },
-    { id: 320, name: "Great Lakes Grated Parmesan 5lb Tub", quantity: 15, minQuantity: 8, expirationDate: getOffsetDate(100) },
     { id: 401, name: "Midwest Farm Salted Butter Foil 1lb", quantity: 85, minQuantity: 50, expirationDate: getOffsetDate(90) },
-    { id: 402, name: "Midwest Farm Unsalted Butter Foil 1lb", quantity: 48, minQuantity: 40, expirationDate: getOffsetDate(85) },
-    { id: 404, name: "Heritage Cultured European Butter", quantity: 32, minQuantity: 20, expirationDate: getOffsetDate(75) },
-    { id: 406, name: "Valley Whipped Butter Tub 12oz", quantity: 22, minQuantity: 15, expirationDate: getOffsetDate(60) },
-    { id: 502, name: "Valley Grade A Sour Cream 16oz Tub", quantity: 48, minQuantity: 30, expirationDate: getOffsetDate(35) },
-    { id: 503, name: "Valley Light Sour Cream 16oz Tub", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(30) },
-    { id: 505, name: "Midwest Ranch Dip 16oz", quantity: 25, minQuantity: 20, expirationDate: getOffsetDate(28) },
-    { id: 601, name: "Valley Organic Whole Milk Ricotta", quantity: 16, minQuantity: 12, expirationDate: getOffsetDate(20) },
-    { id: 603, name: "Great Lakes Ice Cream Mix Chocolate", quantity: 18, minQuantity: 15, expirationDate: getOffsetDate(25) },
-    { id: 605, name: "Valley Sweetened Condensed Milk", quantity: 100, minQuantity: 30, expirationDate: getOffsetDate(180) },
-    { id: 606, name: "Valley Evaporated Milk 12oz Can", quantity: 85, minQuantity: 30, expirationDate: getOffsetDate(200) },
-    { id: 701, name: "Wisconsin Aged Swiss Wheel 15lb", quantity: 40, minQuantity: 10, expirationDate: getOffsetDate(120) },
-    { id: 702, name: "Valley Ultra-Pasteurized Milk 1/2 Gal", quantity: 95, minQuantity: 30, expirationDate: getOffsetDate(45) },
-    { id: 703, name: "Midwest Clarified Ghee 13oz Jar", quantity: 60, minQuantity: 15, expirationDate: getOffsetDate(250) },
-    { id: 704, name: "Heritage Grass-Fed Salted Butter", quantity: 50, minQuantity: 20, expirationDate: getOffsetDate(90) },
-    { id: 705, name: "Northwood Organic Plain Yogurt 5lb", quantity: 30, minQuantity: 10, expirationDate: getOffsetDate(30) },
-    { id: 706, name: "Valley Real Whipped Cream 14oz", quantity: 72, minQuantity: 25, expirationDate: getOffsetDate(60) },
-    { id: 707, name: "Wisconsin Provolone Cheese Log", quantity: 28, minQuantity: 8, expirationDate: getOffsetDate(80) },
-    { id: 708, name: "Great Lakes String Cheese 1oz (24pk)", quantity: 65, minQuantity: 20, expirationDate: getOffsetDate(50) },
-    { id: 709, name: "DairyLand Organic Chocolate Milk", quantity: 42, minQuantity: 15, expirationDate: getOffsetDate(35) },
-    { id: 710, name: "Chef's Select Unsalted Butter 1lb Case", quantity: 18, minQuantity: 5, expirationDate: getOffsetDate(90) },
-    { id: 711, name: "Midwest Sharp Cheddar Slices 2.5lb", quantity: 34, minQuantity: 12, expirationDate: getOffsetDate(65) },
-    { id: 712, name: "Valley Organic Whole Milk Quart", quantity: 55, minQuantity: 20, expirationDate: getOffsetDate(22) },
-    { id: 713, name: "Hills Farm Strawberry Greek Yogurt", quantity: 28, minQuantity: 10, expirationDate: getOffsetDate(30) },
-    { id: 714, name: "Great Lakes Monterey Jack Block", quantity: 22, minQuantity: 8, expirationDate: getOffsetDate(75) },
-    { id: 715, name: "Artisanal Goat Cheese Log 11oz", quantity: 19, minQuantity: 6, expirationDate: getOffsetDate(40) },
-    { id: 716, name: "Wisconsin Sharp White Cheddar 8oz", quantity: 80, minQuantity: 25, expirationDate: getOffsetDate(110) },
-    { id: 717, name: "Valley Condensed Skim Milk 5 Gal", quantity: 12, minQuantity: 4, expirationDate: getOffsetDate(20) }
+    { id: 605, name: "Valley Sweetened Condensed Milk", quantity: 100, minQuantity: 30, expirationDate: getOffsetDate(180) }
   ];
 }
 
 let savedInventory = JSON.parse(localStorage.getItem('freshstock_inventory'));
 let rawInventory = (savedInventory && savedInventory.length > 0) ? savedInventory : getInitialDataset();
-
 let currentFilter = 'all';
 
 function saveToLocalStorage() {
@@ -114,8 +67,13 @@ function runPriorityEngine(items) {
   today.setHours(0, 0, 0, 0);
 
   return items.map(item => {
-    const [year, month, day] = item.expirationDate.split('-').map(Number);
-    const expDate = new Date(year, month - 1, day);
+    let expDate;
+    if (item.expirationDate && typeof item.expirationDate === 'string' && item.expirationDate.includes('-')) {
+      const [year, month, day] = item.expirationDate.split('-').map(Number);
+      expDate = new Date(year, month - 1, day);
+    } else {
+      expDate = new Date(item.expirationDate);
+    }
     expDate.setHours(0, 0, 0, 0);
 
     const diffTime = expDate - today;
@@ -147,10 +105,11 @@ function runPriorityEngine(items) {
 }
 
 // ----------------------------------------------------
-// 3. Render Metric Stats Bar (Clickable Filters)
+// 3. Render Metric Stats Bar
 // ----------------------------------------------------
 function renderMetrics(processedItems) {
   const metricsContainer = document.getElementById('metrics-bar');
+  if (!metricsContainer) return;
 
   const criticalCount = processedItems.filter(i => i.tier === 1).length;
   const warningCount = processedItems.filter(i => i.tier === 2 || i.tier === 3).length;
@@ -173,11 +132,7 @@ function renderMetrics(processedItems) {
 }
 
 function setFilter(filterType) {
-  if (currentFilter === filterType) {
-    currentFilter = 'all';
-  } else {
-    currentFilter = filterType;
-  }
+  currentFilter = currentFilter === filterType ? 'all' : filterType;
   renderDashboard();
 }
 
@@ -186,12 +141,12 @@ function setFilter(filterType) {
 // ----------------------------------------------------
 function renderDashboard() {
   const dashboardContainer = document.getElementById('dashboard');
-  const allProcessed = runPriorityEngine(rawInventory);
+  if (!dashboardContainer) return;
 
+  const allProcessed = runPriorityEngine(rawInventory);
   renderMetrics(allProcessed);
 
   dashboardContainer.innerHTML = '';
-
   let itemsToDisplay = [];
 
   if (currentFilter === 'critical') {
@@ -234,20 +189,11 @@ function renderDashboard() {
   const warningItems = itemsToDisplay.filter(i => i.tier === 2 || i.tier === 3);
   const healthyItems = itemsToDisplay.filter(i => i.tier === null);
 
-  if (criticalItems.length > 0) {
-    dashboardContainer.appendChild(createSection('Critical Action Needed', 'critical', criticalItems));
-  }
-
-  if (warningItems.length > 0) {
-    dashboardContainer.appendChild(createSection('Attention Needed', 'warning', warningItems));
-  }
-
-  if (healthyItems.length > 0) {
-    dashboardContainer.appendChild(createSection('Healthy Inventory', 'healthy', healthyItems));
-  }
+  if (criticalItems.length > 0) dashboardContainer.appendChild(createSection('Critical Action Needed', 'critical', criticalItems));
+  if (warningItems.length > 0) dashboardContainer.appendChild(createSection('Attention Needed', 'warning', warningItems));
+  if (healthyItems.length > 0) dashboardContainer.appendChild(createSection('Healthy Inventory', 'healthy', healthyItems));
 }
 
-// Helpers for section & card creation
 function createSection(titleText, categoryClass, itemsList) {
   const section = document.createElement('div');
   section.className = 'section';
@@ -259,9 +205,7 @@ function createSection(titleText, categoryClass, itemsList) {
   const cardList = document.createElement('div');
   cardList.className = 'card-list';
 
-  itemsList.forEach(item => {
-    cardList.appendChild(createCardElement(item));
-  });
+  itemsList.forEach(item => cardList.appendChild(createCardElement(item)));
 
   section.appendChild(title);
   section.appendChild(cardList);
@@ -270,15 +214,10 @@ function createSection(titleText, categoryClass, itemsList) {
 
 function createCardElement(item) {
   let expiryText = '';
-  if (item.daysLeft < 0) {
-    expiryText = `Expired ${Math.abs(item.daysLeft)} days ago`;
-  } else if (item.daysLeft === 0) {
-    expiryText = 'Expires today!';
-  } else if (item.daysLeft === 1) {
-    expiryText = 'Expires tomorrow';
-  } else {
-    expiryText = `Expires in ${item.daysLeft} days`;
-  }
+  if (item.daysLeft < 0) expiryText = `Expired ${Math.abs(item.daysLeft)} days ago`;
+  else if (item.daysLeft === 0) expiryText = 'Expires today!';
+  else if (item.daysLeft === 1) expiryText = 'Expires tomorrow';
+  else expiryText = `Expires in ${item.daysLeft} days`;
 
   const statusMap = {
     'EXPIRED': 'Action Required',
@@ -291,10 +230,12 @@ function createCardElement(item) {
   const badgeText = item.status ? statusMap[item.status] : 'Healthy';
   const badgeClass = item.status ? `badge-${item.status}` : 'badge-HEALTHY';
 
-  // Render Resolve button ONLY for items that have active alerts (Tier 1, 2, or 3)
   const actionBtnHtml = item.tier !== null 
     ? `<button class="action-btn" onclick="handleQuickAction(${item.id})">Resolve</button>` 
     : '';
+
+  const displayQty = typeof item.quantity === 'number' ? Number(item.quantity.toFixed(2)) : item.quantity;
+  const displayMinQty = typeof item.minQuantity === 'number' ? Number(item.minQuantity.toFixed(2)) : item.minQuantity;
 
   const card = document.createElement('div');
   card.className = `card ${isCriticalClass}`;
@@ -305,7 +246,7 @@ function createCardElement(item) {
         <span class="badge ${badgeClass}">${badgeText}</span>
       </div>
       <div class="meta-text">
-        <span>${expiryText}</span> • Stock: <span>${item.quantity}</span> (Min: ${item.minQuantity})
+        <span>${expiryText}</span> • Stock: <span>${displayQty}</span> (Min: ${displayMinQty})
       </div>
     </div>
     ${actionBtnHtml}
@@ -315,7 +256,7 @@ function createCardElement(item) {
 }
 
 // ----------------------------------------------------
-// 5. Handlers: Resolve & Add Single Item
+// 5. Single Item Add & Resolve Handlers
 // ----------------------------------------------------
 function handleQuickAction(itemId) {
   rawInventory = rawInventory.filter(item => item.id !== itemId);
@@ -323,32 +264,41 @@ function handleQuickAction(itemId) {
   renderDashboard();
 }
 
-document.getElementById('add-item-form').addEventListener('submit', function(e) {
-  e.preventDefault();
+const addItemForm = document.getElementById('add-item-form');
+if (addItemForm) {
+  addItemForm.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-  const newItem = {
-    id: Date.now(),
-    name: document.getElementById('item-name').value.trim(),
-    quantity: Number(document.getElementById('item-qty').value),
-    minQuantity: Number(document.getElementById('item-min').value),
-    expirationDate: document.getElementById('item-exp').value
-  };
+    const newItem = {
+      id: Date.now(),
+      name: document.getElementById('item-name').value.trim(),
+      quantity: Number(document.getElementById('item-qty').value),
+      minQuantity: Number(document.getElementById('item-min').value),
+      expirationDate: document.getElementById('item-exp').value
+    };
 
-  rawInventory.push(newItem);
-  saveToLocalStorage();
-  renderDashboard();
-
-  this.reset();
-});
+    rawInventory.push(newItem);
+    saveToLocalStorage();
+    renderDashboard();
+    this.reset();
+  });
+}
 
 // ----------------------------------------------------
-// 6. CSV File Upload & Parsing Engine
+// 6. CSV Upload, Parsing & Removal Engine
 // ----------------------------------------------------
 const dropZone = document.getElementById('drop-zone');
 const fileInput = document.getElementById('csv-file-input');
+const removeBtn = document.getElementById('remove-file-btn');
+const fileInfo = document.getElementById('file-info');
+const fileNameSpan = document.getElementById('uploaded-file-name');
+const dropZoneText = document.getElementById('drop-zone-text');
 
 if (dropZone && fileInput) {
-  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('click', (e) => {
+    if (e.target.id === 'remove-file-btn') return;
+    fileInput.click();
+  });
 
   ['dragenter', 'dragover'].forEach(eventName => {
     dropZone.addEventListener(eventName, (e) => {
@@ -381,12 +331,57 @@ function handleCSVFile(file) {
     return;
   }
 
+  if (fileNameSpan && fileInfo && dropZoneText) {
+    fileNameSpan.innerText = file.name;
+    fileInfo.style.display = 'flex';
+    dropZoneText.style.display = 'none';
+  }
+
   const reader = new FileReader();
   reader.onload = function(e) {
-    const text = e.target.result;
-    parseAndImportCSV(text);
+    parseAndImportCSV(e.target.result);
   };
   reader.readAsText(file);
+}
+
+// Remove File Handler
+if (removeBtn) {
+  removeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    if (fileInput) fileInput.value = '';
+
+    if (fileInfo && dropZoneText) {
+      fileInfo.style.display = 'none';
+      dropZoneText.style.display = 'block';
+    }
+
+    rawInventory = getInitialDataset();
+    saveToLocalStorage();
+    renderDashboard();
+
+    alert('Uploaded CSV removed. Restored default inventory!');
+  });
+}
+
+function splitCSVLine(line) {
+  const result = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    if (char === '"' || char === "'") {
+      inQuotes = !inQuotes;
+    } else if (char === ',' && !inQuotes) {
+      result.push(current.trim());
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+  result.push(current.trim());
+  return result;
 }
 
 function parseAndImportCSV(csvText) {
@@ -396,53 +391,71 @@ function parseAndImportCSV(csvText) {
     return;
   }
 
-  // Parse header row dynamically
-  const headers = lines[0].split(',').map(h => h.replace(/["']/g, '').trim().toLowerCase());
-  
-  const nameIdx = headers.indexOf('name');
-  const qtyIdx = headers.indexOf('quantity');
-  const minIdx = headers.indexOf('minquantity');
-  const expIdx = headers.indexOf('expirationdate');
+  const headers = splitCSVLine(lines[0]).map(h => h.replace(/["']/g, '').trim().toLowerCase());
 
-  if (nameIdx === -1 || qtyIdx === -1 || minIdx === -1 || expIdx === -1) {
-    alert('Invalid CSV header format. File must contain columns: name, quantity, minQuantity, expirationDate');
+  const nameIdx = headers.findIndex(h => h.includes('product name') || h === 'product name' || h === 'name');
+  const brandIdx = headers.findIndex(h => h.includes('brand') || h === 'brand');
+  const expIdx = headers.findIndex(h => h.includes('expiration date') || h === 'expiration date' || h === 'expirationdate');
+  const qtyIdx = headers.findIndex(h => h.includes('quantity in stock') || h === 'quantity in stock' || h === 'quantity');
+  const minIdx = headers.findIndex(h => h.includes('minimum stock threshold') || h === 'minimum stock threshold' || h === 'minquantity');
+
+  if (nameIdx === -1 || expIdx === -1 || qtyIdx === -1 || minIdx === -1) {
+    alert('Missing required headers. CSV must contain:\n- Product Name\n- Expiration Date\n- Quantity in Stock\n- Minimum Stock Threshold');
     return;
   }
 
-  const newItems = [];
+  const productMap = new Map();
 
   for (let i = 1; i < lines.length; i++) {
-    const row = lines[i].split(',').map(cell => cell.replace(/["']/g, '').trim());
-    if (row.length < headers.length) continue;
+    const row = splitCSVLine(lines[i]).map(cell => cell.replace(/["']/g, '').trim());
+    if (row.length <= Math.max(nameIdx, expIdx, qtyIdx, minIdx)) continue;
 
-    const name = row[nameIdx];
+    let baseName = row[nameIdx];
+    const brand = brandIdx !== -1 ? row[brandIdx] : '';
+
+    let fullProductName = baseName;
+    if (brand && !baseName.toLowerCase().includes(brand.toLowerCase())) {
+      fullProductName = `${brand} ${baseName}`;
+    }
+
     const quantity = Number(row[qtyIdx]);
     const minQuantity = Number(row[minIdx]);
-    const expirationDate = row[expIdx];
+    const expDateStr = row[expIdx];
 
-    if (name && !isNaN(quantity) && !isNaN(minQuantity) && expirationDate) {
-      newItems.push({
-        id: Date.now() + i,
-        name,
-        quantity,
-        minQuantity,
-        expirationDate
-      });
+    if (fullProductName && expDateStr && !isNaN(quantity) && !isNaN(minQuantity)) {
+      if (productMap.has(fullProductName)) {
+        const existing = productMap.get(fullProductName);
+        existing.quantity = Math.round((existing.quantity + quantity) * 100) / 100;
+        existing.minQuantity = Math.max(existing.minQuantity, minQuantity);
+
+        if (new Date(expDateStr) < new Date(existing.expirationDate)) {
+          existing.expirationDate = expDateStr;
+        }
+      } else {
+        productMap.set(fullProductName, {
+          id: Date.now() + i,
+          name: fullProductName,
+          quantity: Math.round(quantity * 100) / 100,
+          minQuantity: Math.round(minQuantity * 100) / 100,
+          expirationDate: expDateStr
+        });
+      }
     }
   }
+
+  const newItems = Array.from(productMap.values());
 
   if (newItems.length === 0) {
     alert('No valid inventory rows found in the CSV.');
     return;
   }
 
-  rawInventory = [...newItems, ...rawInventory];
+  rawInventory = newItems;
   saveToLocalStorage();
   renderDashboard();
 
-  alert(`Successfully imported ${newItems.length} inventory items!`);
-  fileInput.value = '';
+  alert(`Successfully loaded ${newItems.length} unique products into FreshStock!`);
 }
 
-// Initial Render
+// Initial Execution
 renderDashboard();
