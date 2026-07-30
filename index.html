@@ -3,53 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FreshStock - Smart Inventory Dashboard</title>
-
-  <!-- 🟢 Tab Icon -->
+  <title>FreshStock - Predictive Inventory Management</title>
+  
+  <!-- Tab Icon -->
   <link rel="icon" type="image/png" href="fresh.png" />
-
-  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Landing Page CSS -->
+  <link rel="stylesheet" href="landing.css" />
 </head>
-<body>
-  <div class="container">
-    <header class="app-header">
-      <h1>FreshStock Dashboard</h1>
-      <p class="subtitle">Real-time dairy inventory monitoring & run-out forecast engine</p>
-    </header>
+<body class="landing-body">
 
-    <!-- Metrics Bar (Clickable Filters: Critical, Warnings, Healthy, Run-Out Risk) -->
-    <section id="metrics-bar" class="metrics-bar"></section>
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="fresh.png" alt="FreshStock Logo" class="nav-logo" />
+      <span>FreshStock</span>
+    </div>
+    <a href="dashboard.html" class="cta-btn-nav">Launch App</a>
+  </nav>
 
-    <!-- CSV Upload & Remove Zone -->
-    <section class="upload-section">
-      <div id="drop-zone" class="drop-zone">
-        <p id="drop-zone-text">Drag & drop your CSV file here or <strong>click to browse</strong></p>
-        <input type="file" id="csv-file-input" accept=".csv" style="display: none;" />
-        
-        <div id="file-info" class="file-info" style="display: none;">
-          <span id="uploaded-file-name">filename.csv</span>
-          <button type="button" id="remove-file-btn" class="remove-btn">Remove CSV</button>
-        </div>
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-content">
+      <h1>Smart Predictive Inventory for Fresh Goods</h1>
+      <p class="hero-subtitle">
+        Eliminate spoilage, prevent stockouts, and manage stock thresholds in real-time before items run out.
+      </p>
+      <div class="hero-buttons">
+        <a href="dashboard.html" class="btn btn-primary btn-large">Open Dashboard</a>
+        <a href="#how-it-works" class="btn btn-secondary btn-large">Learn More</a>
       </div>
-    </section>
+    </div>
+  </header>
 
-    <!-- Manual Item Entry Form (Includes Daily Usage field for Run-Out Forecast) -->
-    <section class="form-section">
-      <h2>Add Inventory Item</h2>
-      <form id="add-item-form" class="item-form">
-        <input type="text" id="item-name" placeholder="Product Name" required />
-        <input type="number" id="item-qty" placeholder="Quantity" step="any" required />
-        <input type="number" id="item-min" placeholder="Min Threshold" step="any" required />
-        <input type="number" id="item-daily" placeholder="Daily Usage (Opt)" step="any" />
-        <input type="date" id="item-exp" required />
-        <button type="submit" class="submit-btn">Add SKU</button>
-      </form>
-    </section>
+  <!-- Features Grid Section -->
+  <section id="how-it-works" class="info-section">
+    <h2>Why FreshStock?</h2>
+    <div class="cards-grid">
+      <div class="info-card">
+        <div class="card-icon">⚡</div>
+        <h3>Real-time Alerts</h3>
+        <p>Instant status indicators for critical stock levels, upcoming expiration dates, and items needing urgent reorders.</p>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">📊</div>
+        <h3>Run-Out Forecasts</h3>
+        <p>Predictive analytics automatically calculate your Days of Inventory (DOI) based on daily usage velocity.</p>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">📁</div>
+        <h3>Instant CSV Intake</h3>
+        <p>Upload batch inventory records via drag-and-drop CSV or manually add individual items in seconds.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Main Inventory Cards Container -->
-    <main id="dashboard" class="dashboard-container"></main>
-  </div>
+  <!-- Quick Start Call to Action -->
+  <section class="try-section">
+    <h2>Ready to optimize your inventory?</h2>
+    <p class="step-list">
+      No complex sign-up required. Access the interactive dashboard directly to test your CSV datasets or manage stock levels.
+    </p>
+    <div class="center-btn">
+      <a href="dashboard.html" class="btn btn-primary btn-large">Go to Live Dashboard →</a>
+    </div>
+  </section>
 
-  <script src="script.js"></script>
+  <footer>
+    <p>&copy; 2026 FreshStock Inventory Engine. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>

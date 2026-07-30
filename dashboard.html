@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreshStock - Smart Inventory Dashboard</title>
+
+  <!-- Tab Icon -->
+  <link rel="icon" type="image/png" href="fresh.png" />
+
+  <!-- Dashboard CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Clean Back Navigation -->
+    <nav class="nav-back-container">
+      <a href="index.html" class="back-link">← Back to Main Page</a>
+    </nav>
+
+    <!-- App Header -->
+    <header class="app-header">
+      <h1>FreshStock Dashboard</h1>
+      <p class="subtitle">Real-time dairy inventory monitoring & run-out forecast engine</p>
+    </header>
+
+    <!-- Metrics Bar (Filter Cards) -->
+    <section id="metrics-bar" class="metrics-bar"></section>
+
+    <!-- CSV Upload & Remove Dropzone -->
+    <section class="upload-section">
+      <div id="drop-zone" class="drop-zone">
+        <p id="drop-zone-text">Drag & drop your CSV file here or <strong>click to browse</strong></p>
+        <input type="file" id="csv-file-input" accept=".csv" style="display: none;" />
+        
+        <div id="file-info" class="file-info" style="display: none;">
+          <span id="uploaded-file-name">filename.csv</span>
+          <button type="button" id="remove-file-btn" class="remove-btn">Remove CSV</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Manual Item Intake Form -->
+    <section class="form-section">
+      <h2>Add Inventory Item</h2>
+      <form id="add-item-form" class="item-form">
+        <input type="text" id="item-name" placeholder="Product Name" required />
+        <input type="number" id="item-qty" placeholder="Quantity" step="any" required />
+        <input type="number" id="item-min" placeholder="Min Threshold" step="any" required />
+        <input type="number" id="item-daily" placeholder="Daily Usage (Opt)" step="any" />
+        <input type="date" id="item-exp" required />
+        <button type="submit" class="submit-btn">Add SKU</button>
+      </form>
+    </section>
+
+    <!-- Main Inventory SKU Cards Grid -->
+    <main id="dashboard" class="dashboard-container"></main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

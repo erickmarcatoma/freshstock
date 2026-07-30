@@ -16,6 +16,23 @@ body {
   margin: 0 auto;
 }
 
+/* Back Link for Navigation */
+.nav-back-container {
+  margin-bottom: 12px;
+}
+
+.back-link {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
 .app-header {
   margin-bottom: 24px;
 }
@@ -31,7 +48,7 @@ body {
   margin-top: 4px;
 }
 
-/* Metrics Bar (Updated to 4 columns for Run-Out Metric) */
+/* Metrics Bar (4 columns for Run-Out Metric) */
 .metrics-bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
