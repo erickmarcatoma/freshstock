@@ -9,7 +9,7 @@ function getOffsetDate(daysOffset) {
 }
 
 // ----------------------------------------------------
-// 1. Dynamic Default Inventory Dataset
+// 1. Dynamic Default Inventory Dataset (For Demo Mode)
 // ----------------------------------------------------
 function getInitialDataset() {
   return [
@@ -51,12 +51,26 @@ function getInitialDataset() {
   ];
 }
 
+// Default state starts EMPTY unless saved items exist
 let savedInventory = JSON.parse(localStorage.getItem('freshstock_inventory'));
-let rawInventory = (savedInventory && savedInventory.length > 0) ? savedInventory : getInitialDataset();
+let rawInventory = (savedInventory && savedInventory.length > 0) ? savedInventory : [];
 let currentFilter = 'all';
 
 function saveToLocalStorage() {
   localStorage.setItem('freshstock_inventory', JSON.stringify(rawInventory));
+}
+
+// Handles ?demo=true parameter from landing page
+function checkDemoMode() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('demo') === 'true') {
+    // Populate with demo dataset when explicitly requested
+    rawInventory = getInitialDataset();
+    saveToLocalStorage();
+
+    // Clean up address bar URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
 }
 
 // ----------------------------------------------------
@@ -67,7 +81,6 @@ function runPriorityEngine(items) {
   today.setHours(0, 0, 0, 0);
 
   return items.map(item => {
-    // Expiration date parsing
     let expDate;
     if (item.expirationDate && typeof item.expirationDate === 'string' && item.expirationDate.includes('-')) {
       const [year, month, day] = item.expirationDate.split('-').map(Number);
@@ -84,30 +97,26 @@ function runPriorityEngine(items) {
     const isExpiringSoon = daysLeft > 0 && daysLeft <= 7;
     const isLowStock = Number(item.quantity) <= Number(item.minQuantity);
 
-    // --- RUN-OUT FORECAST (DOI) CALCULATION ---
     const qty = Number(item.quantity) || 0;
     let dailyRate = Number(item.dailySales);
 
-    // Fallback daily consumption rate if not explicitly supplied
     if (!dailyRate || dailyRate <= 0) {
       dailyRate = item.minQuantity ? Math.max(1, Math.round(item.minQuantity / 5)) : 2;
     }
 
     const doiDays = dailyRate > 0 ? Math.floor(qty / dailyRate) : 999;
     
-    // Projected Stockout Date
     const runOutDateObj = new Date(today);
     runOutDateObj.setDate(runOutDateObj.getDate() + doiDays);
     const runOutDateStr = `${runOutDateObj.getMonth() + 1}/${runOutDateObj.getDate()}/${runOutDateObj.getFullYear()}`;
 
-    let doiStatus = 'SAFE'; // SAFE (>7 days)
+    let doiStatus = 'SAFE';
     if (doiDays <= 3) {
-      doiStatus = 'CRITICAL'; // CRITICAL (<= 3 days)
+      doiStatus = 'CRITICAL';
     } else if (doiDays <= 7) {
-      doiStatus = 'WARNING';  // WARNING (4-7 days)
+      doiStatus = 'WARNING';
     }
 
-    // Assign overall inventory tier
     let status = null;
     let tier = null;
 
@@ -186,6 +195,18 @@ function renderDashboard() {
   renderMetrics(allProcessed);
 
   dashboardContainer.innerHTML = '';
+
+  // Empty state handling when no inventory is loaded
+  if (allProcessed.length === 0) {
+    dashboardContainer.innerHTML = `
+      <div class="empty-state">
+        <h3>No Inventory Loaded</h3>
+        <p>Upload a CSV file or click "Try Demo Data" on the home page to get started.</p>
+      </div>
+    `;
+    return;
+  }
+
   let itemsToDisplay = [];
 
   if (currentFilter === 'critical') {
@@ -197,33 +218,16 @@ function renderDashboard() {
   } else if (currentFilter === 'runout') {
     itemsToDisplay = allProcessed.filter(i => i.doiStatus === 'CRITICAL' || i.doiStatus === 'WARNING');
   } else {
-    itemsToDisplay = allProcessed.filter(i => i.tier !== null || i.doiStatus === 'CRITICAL');
+    itemsToDisplay = allProcessed;
   }
 
   itemsToDisplay.sort((a, b) => (a.tier || 4) - (b.tier || 4) || a.doiDays - b.doiDays || a.daysLeft - b.daysLeft);
 
   if (itemsToDisplay.length === 0) {
-    let emptyTitle = "All Stock Healthy";
-    let emptySub = "No critical items or low stock alerts at this time.";
-
-    if (currentFilter === 'critical') {
-      emptyTitle = "No Critical Alerts";
-      emptySub = "You have no items requiring immediate critical action.";
-    } else if (currentFilter === 'warning') {
-      emptyTitle = "No Warnings";
-      emptySub = "No upcoming expiration or low stock warnings.";
-    } else if (currentFilter === 'healthy') {
-      emptyTitle = "No Healthy Items";
-      emptySub = "All items currently require attention.";
-    } else if (currentFilter === 'runout') {
-      emptyTitle = "No Run-Out Risks";
-      emptySub = "All items have sufficient inventory for the coming week.";
-    }
-
     dashboardContainer.innerHTML = `
       <div class="empty-state">
-        <h3>${emptyTitle}</h3>
-        <p>${emptySub}</p>
+        <h3>No Items Found</h3>
+        <p>No inventory items match the selected filter.</p>
       </div>
     `;
     return;
@@ -274,7 +278,6 @@ function createCardElement(item) {
   const badgeText = item.status ? statusMap[item.status] : 'Healthy';
   const badgeClass = item.status ? `badge-${item.status}` : 'badge-HEALTHY';
 
-  // Run-Out Badge Styling & Text
   let doiBadgeText = `${item.doiDays} Days Stock Left`;
   let doiBadgeClass = 'badge-runout-safe';
 
@@ -404,7 +407,7 @@ function handleCSVFile(file) {
   reader.readAsText(file);
 }
 
-// Remove File Handler
+// Remove File Handler - Clears to Blank State
 if (removeBtn) {
   removeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -416,11 +419,11 @@ if (removeBtn) {
       dropZoneText.style.display = 'block';
     }
 
-    rawInventory = getInitialDataset();
+    rawInventory = []; // Reset to empty
     saveToLocalStorage();
     renderDashboard();
 
-    alert('Uploaded CSV removed. Restored default inventory!');
+    alert('Uploaded CSV removed.');
   });
 }
 
@@ -521,5 +524,6 @@ function parseAndImportCSV(csvText) {
   alert(`Successfully loaded ${newItems.length} unique products into FreshStock with Run-Out Forecast calculations!`);
 }
 
-// Initial Execution
+// Check if demo query was passed, then render
+checkDemoMode();
 renderDashboard();
