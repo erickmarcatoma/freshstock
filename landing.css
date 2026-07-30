@@ -9,7 +9,11 @@
 }
 
 .landing-body {
-  background: linear-gradient(135deg, #f4f7f6 0%, #e8f0fe 100%);
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(to right, rgba(203, 213, 225, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(203, 213, 225, 0.4) 1px, transparent 1px);
+  background-size: 32px 32px;
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: #2c3e50;
