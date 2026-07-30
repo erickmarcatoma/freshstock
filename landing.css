@@ -57,7 +57,7 @@
 /* Hero Section */
 .hero-section {
   text-align: center;
-  padding: 60px 20px;
+  padding: 60px 20px 80px 20px;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -113,6 +113,54 @@
 .btn-large {
   font-size: 1.1rem;
   padding: 14px 28px;
+}
+
+/* ====================================================
+   Impact Stats Strip
+   ==================================================== */
+
+.stats-strip {
+  max-width: 900px;
+  margin: -35px auto 40px auto;
+  padding: 0 20px;
+}
+
+.stats-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #2bb673;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background-color: #e2e8f0;
 }
 
 /* Content Sections & Features Grid */
@@ -180,7 +228,7 @@ footer {
 }
 
 /* Mobile Responsive Tweaks */
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .hero-content h1 {
     font-size: 2rem;
   }
@@ -191,5 +239,16 @@ footer {
   
   .navbar {
     padding: 16px 20px;
+  }
+
+  .stats-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 16px;
+  }
+
+  .stat-divider {
+    width: 80%;
+    height: 1px;
   }
 }
