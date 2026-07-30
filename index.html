@@ -78,6 +78,77 @@
     </div>
   </section>
 
+  <!-- CSV Format & Requirements Section -->
+  <section class="csv-guide-section">
+    <div class="csv-guide-container">
+      <h2>CSV Upload Requirements</h2>
+      <p class="section-subtitle">
+        FreshStock processes standard CSV files locally in your browser. Ensure your file includes the required headers listed below.
+      </p>
+
+      <div class="accordion-item">
+        <details>
+          <summary class="accordion-header">
+            <span>📋 Required & Optional CSV Headers</span>
+            <span class="icon">+</span>
+          </summary>
+          <div class="accordion-content">
+            <p>Your CSV file should include a header row with the following column names (case-insensitive):</p>
+            
+            <table class="csv-table">
+              <thead>
+                <tr>
+                  <th>Header Name</th>
+                  <th>Status</th>
+                  <th>Description & Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Product Name</code></td>
+                  <td><span class="tag tag-required">Required</span></td>
+                  <td>Name or description of the item (e.g., <em>Whole Milk 1 Gal</em>)</td>
+                </tr>
+                <tr>
+                  <td><code>Expiration Date</code></td>
+                  <td><span class="tag tag-required">Required</span></td>
+                  <td>Date formatted as <code>YYYY-MM-DD</code> or <code>MM/DD/YYYY</code></td>
+                </tr>
+                <tr>
+                  <td><code>Quantity in Stock</code></td>
+                  <td><span class="tag tag-required">Required</span></td>
+                  <td>Current stock count on hand (e.g., <code>25</code>)</td>
+                </tr>
+                <tr>
+                  <td><code>Minimum Stock Threshold</code></td>
+                  <td><span class="tag tag-required">Required</span></td>
+                  <td>Reorder alert threshold count (e.g., <code>10</code>)</td>
+                </tr>
+                <tr>
+                  <td><code>Brand</code></td>
+                  <td><span class="tag tag-optional">Optional</span></td>
+                  <td>Prepended to item name if not already included</td>
+                </tr>
+                <tr>
+                  <td><code>Quantity Sold</code></td>
+                  <td><span class="tag tag-optional">Optional</span></td>
+                  <td>Used to calculate daily usage velocity for DOI forecasting</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="csv-example-box">
+              <span class="example-title">Example CSV Format:</span>
+              <pre><code>Product Name,Expiration Date,Quantity in Stock,Minimum Stock Threshold
+Valley Whole Milk 1 Gal,2026-08-15,45,15
+Hills Farm Greek Yogurt,2026-08-05,8,20</code></pre>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- Quick Start Call to Action -->
   <section class="try-section">
     <h2>Ready to optimize your inventory?</h2>
