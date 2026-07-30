@@ -51,26 +51,35 @@ function getInitialDataset() {
   ];
 }
 
-// Default state starts EMPTY unless saved items exist
-let savedInventory = JSON.parse(localStorage.getItem('freshstock_inventory'));
-let rawInventory = (savedInventory && savedInventory.length > 0) ? savedInventory : [];
+// State initialization
+let rawInventory = [];
 let currentFilter = 'all';
 
 function saveToLocalStorage() {
   localStorage.setItem('freshstock_inventory', JSON.stringify(rawInventory));
 }
 
-// Handles ?demo=true parameter from landing page
+// Strict session handling: Demo vs Blank entry point
 function checkDemoMode() {
   const urlParams = new URLSearchParams(window.location.search);
+  
   if (urlParams.get('demo') === 'true') {
-    // Populate with demo dataset when explicitly requested
+    // User clicked "Try Demo Data" -> Populate demo items
     rawInventory = getInitialDataset();
     saveToLocalStorage();
-
-    // Clean up address bar URL
     window.history.replaceState({}, document.title, window.location.pathname);
+  } else {
+    // User clicked "Open Dashboard" -> Force wipe data to ensure clean slate (0s)
+    localStorage.removeItem('freshstock_inventory');
+    rawInventory = [];
   }
+}
+
+function clearAllData() {
+  localStorage.removeItem('freshstock_inventory');
+  rawInventory = [];
+  renderDashboard();
+  alert('Dashboard wiped! All counts reset to 0.');
 }
 
 // ----------------------------------------------------
@@ -524,6 +533,6 @@ function parseAndImportCSV(csvText) {
   alert(`Successfully loaded ${newItems.length} unique products into FreshStock with Run-Out Forecast calculations!`);
 }
 
-// Check if demo query was passed, then render
+// Execution
 checkDemoMode();
 renderDashboard();
