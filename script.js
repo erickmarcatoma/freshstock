@@ -9,45 +9,45 @@ function getOffsetDate(daysOffset) {
 }
 
 // ----------------------------------------------------
-// 1. Dynamic Default Inventory Dataset (Initial Fallback)
+// 1. Dynamic Default Inventory Dataset
 // ----------------------------------------------------
 function getInitialDataset() {
   return [
     // --- TIER 1: CRITICAL ALERTS ---
-    { id: 101, name: "Valley Whole Milk 1 Gal", quantity: 8, minQuantity: 45, expirationDate: getOffsetDate(-2) },
-    { id: 103, name: "Valley 2% Reduced Fat Milk 1 Gal", quantity: 5, minQuantity: 50, expirationDate: getOffsetDate(-1) },
-    { id: 113, name: "Valley Heavy Cream 40% Quart", quantity: 12, minQuantity: 30, expirationDate: getOffsetDate(0) },
-    { id: 208, name: "Northwood Peach Yogurt 6oz (12pk)", quantity: 4, minQuantity: 10, expirationDate: getOffsetDate(-3) },
-    { id: 307, name: "Great Lakes Shredded Mozzarella 5lb", quantity: 2, minQuantity: 18, expirationDate: getOffsetDate(1) },
-    { id: 604, name: "Midwest Eggnog 1/2 Gal", quantity: 1, minQuantity: 5, expirationDate: getOffsetDate(-5) },
+    { id: 101, name: "Valley Whole Milk 1 Gal", quantity: 8, minQuantity: 45, dailySales: 5, expirationDate: getOffsetDate(-2) },
+    { id: 103, name: "Valley 2% Reduced Fat Milk 1 Gal", quantity: 5, minQuantity: 50, dailySales: 6, expirationDate: getOffsetDate(-1) },
+    { id: 113, name: "Valley Heavy Cream 40% Quart", quantity: 12, minQuantity: 30, dailySales: 4, expirationDate: getOffsetDate(0) },
+    { id: 208, name: "Northwood Peach Yogurt 6oz (12pk)", quantity: 4, minQuantity: 10, dailySales: 2, expirationDate: getOffsetDate(-3) },
+    { id: 307, name: "Great Lakes Shredded Mozzarella 5lb", quantity: 2, minQuantity: 18, dailySales: 3, expirationDate: getOffsetDate(1) },
+    { id: 604, name: "Midwest Eggnog 1/2 Gal", quantity: 1, minQuantity: 5, dailySales: 1, expirationDate: getOffsetDate(-5) },
 
     // --- TIER 2 & 3: WARNINGS ---
-    { id: 102, name: "Valley Whole Milk 1/2 Gal", quantity: 60, minQuantity: 30, expirationDate: getOffsetDate(3) },
-    { id: 105, name: "Valley 1% Lowfat Milk 1 Gal", quantity: 10, minQuantity: 35, expirationDate: getOffsetDate(12) },
-    { id: 115, name: "Chef's Select Cream 5 Gal Bag", quantity: 3, minQuantity: 8, expirationDate: getOffsetDate(5) },
-    { id: 117, name: "Valley Half & Half Pint", quantity: 8, minQuantity: 25, expirationDate: getOffsetDate(15) },
-    { id: 201, name: "Hills Farm Plain Greek Yogurt 32oz", quantity: 6, minQuantity: 20, expirationDate: getOffsetDate(4) },
-    { id: 204, name: "Hills Farm Blueberry Greek Yogurt", quantity: 2, minQuantity: 10, expirationDate: getOffsetDate(6) },
-    { id: 303, name: "Wisconsin Shredded Cheddar 5lb Bag", quantity: 4, minQuantity: 20, expirationDate: getOffsetDate(20) },
-    { id: 310, name: "Midwest Shredded Pepper Jack 5lb", quantity: 6, minQuantity: 12, expirationDate: getOffsetDate(4) },
-    { id: 501, name: "Valley Grade A Sour Cream 5lb Tub", quantity: 7, minQuantity: 15, expirationDate: getOffsetDate(5) },
-    { id: 504, name: "Midwest French Onion Dip 16oz", quantity: 3, minQuantity: 20, expirationDate: getOffsetDate(2) },
+    { id: 102, name: "Valley Whole Milk 1/2 Gal", quantity: 60, minQuantity: 30, dailySales: 8, expirationDate: getOffsetDate(3) },
+    { id: 105, name: "Valley 1% Lowfat Milk 1 Gal", quantity: 10, minQuantity: 35, dailySales: 4, expirationDate: getOffsetDate(12) },
+    { id: 115, name: "Chef's Select Cream 5 Gal Bag", quantity: 3, minQuantity: 8, dailySales: 1.5, expirationDate: getOffsetDate(5) },
+    { id: 117, name: "Valley Half & Half Pint", quantity: 8, minQuantity: 25, dailySales: 3, expirationDate: getOffsetDate(15) },
+    { id: 201, name: "Hills Farm Plain Greek Yogurt 32oz", quantity: 6, minQuantity: 20, dailySales: 2.5, expirationDate: getOffsetDate(4) },
+    { id: 204, name: "Hills Farm Blueberry Greek Yogurt", quantity: 2, minQuantity: 10, dailySales: 1, expirationDate: getOffsetDate(6) },
+    { id: 303, name: "Wisconsin Shredded Cheddar 5lb Bag", quantity: 4, minQuantity: 20, dailySales: 2, expirationDate: getOffsetDate(20) },
+    { id: 310, name: "Midwest Shredded Pepper Jack 5lb", quantity: 6, minQuantity: 12, dailySales: 2, expirationDate: getOffsetDate(4) },
+    { id: 501, name: "Valley Grade A Sour Cream 5lb Tub", quantity: 7, minQuantity: 15, dailySales: 3, expirationDate: getOffsetDate(5) },
+    { id: 504, name: "Midwest French Onion Dip 16oz", quantity: 3, minQuantity: 20, dailySales: 1.5, expirationDate: getOffsetDate(2) },
 
     // --- HEALTHY STOCK ---
-    { id: 104, name: "Valley 2% Reduced Fat Milk 1/2 Gal", quantity: 35, minQuantity: 25, expirationDate: getOffsetDate(14) },
-    { id: 106, name: "Valley Skim Fat Free Milk 1 Gal", quantity: 25, minQuantity: 20, expirationDate: getOffsetDate(18) },
-    { id: 107, name: "Prairie Organic Whole Milk 1/2 Gal", quantity: 30, minQuantity: 15, expirationDate: getOffsetDate(16) },
-    { id: 108, name: "Prairie Organic 2% Milk 1/2 Gal", quantity: 22, minQuantity: 15, expirationDate: getOffsetDate(22) },
-    { id: 109, name: "Midwest Dairy Chocolate Milk Quart", quantity: 40, minQuantity: 20, expirationDate: getOffsetDate(25) },
-    { id: 111, name: "Great Lakes Lactose-Free Whole Milk", quantity: 18, minQuantity: 12, expirationDate: getOffsetDate(30) },
-    { id: 114, name: "Valley Heavy Cream 40% Pint", quantity: 28, minQuantity: 20, expirationDate: getOffsetDate(25) },
-    { id: 116, name: "Valley Half & Half Quart", quantity: 50, minQuantity: 40, expirationDate: getOffsetDate(20) },
-    { id: 118, name: "Prairie Organic Half & Half Pint", quantity: 19, minQuantity: 15, expirationDate: getOffsetDate(28) },
-    { id: 120, name: "Midwest Cultured Buttermilk 1/2 Gal", quantity: 16, minQuantity: 10, expirationDate: getOffsetDate(35) },
-    { id: 202, name: "Hills Farm Vanilla Greek Yogurt 32oz", quantity: 24, minQuantity: 20, expirationDate: getOffsetDate(30) },
-    { id: 301, name: "Wisconsin Sharp Cheddar Block 10lb", quantity: 14, minQuantity: 10, expirationDate: getOffsetDate(60) },
-    { id: 401, name: "Midwest Farm Salted Butter Foil 1lb", quantity: 85, minQuantity: 50, expirationDate: getOffsetDate(90) },
-    { id: 605, name: "Valley Sweetened Condensed Milk", quantity: 100, minQuantity: 30, expirationDate: getOffsetDate(180) }
+    { id: 104, name: "Valley 2% Reduced Fat Milk 1/2 Gal", quantity: 35, minQuantity: 25, dailySales: 4, expirationDate: getOffsetDate(14) },
+    { id: 106, name: "Valley Skim Fat Free Milk 1 Gal", quantity: 25, minQuantity: 20, dailySales: 3, expirationDate: getOffsetDate(18) },
+    { id: 107, name: "Prairie Organic Whole Milk 1/2 Gal", quantity: 30, minQuantity: 15, dailySales: 3.5, expirationDate: getOffsetDate(16) },
+    { id: 108, name: "Prairie Organic 2% Milk 1/2 Gal", quantity: 22, minQuantity: 15, dailySales: 2, expirationDate: getOffsetDate(22) },
+    { id: 109, name: "Midwest Dairy Chocolate Milk Quart", quantity: 40, minQuantity: 20, dailySales: 5, expirationDate: getOffsetDate(25) },
+    { id: 111, name: "Great Lakes Lactose-Free Whole Milk", quantity: 18, minQuantity: 12, dailySales: 2, expirationDate: getOffsetDate(30) },
+    { id: 114, name: "Valley Heavy Cream 40% Pint", quantity: 28, minQuantity: 20, dailySales: 3, expirationDate: getOffsetDate(25) },
+    { id: 116, name: "Valley Half & Half Quart", quantity: 50, minQuantity: 40, dailySales: 6, expirationDate: getOffsetDate(20) },
+    { id: 118, name: "Prairie Organic Half & Half Pint", quantity: 19, minQuantity: 15, dailySales: 2, expirationDate: getOffsetDate(28) },
+    { id: 120, name: "Midwest Cultured Buttermilk 1/2 Gal", quantity: 16, minQuantity: 10, dailySales: 1.5, expirationDate: getOffsetDate(35) },
+    { id: 202, name: "Hills Farm Vanilla Greek Yogurt 32oz", quantity: 24, minQuantity: 20, dailySales: 2, expirationDate: getOffsetDate(30) },
+    { id: 301, name: "Wisconsin Sharp Cheddar Block 10lb", quantity: 14, minQuantity: 10, dailySales: 1, expirationDate: getOffsetDate(60) },
+    { id: 401, name: "Midwest Farm Salted Butter Foil 1lb", quantity: 85, minQuantity: 50, dailySales: 5, expirationDate: getOffsetDate(90) },
+    { id: 605, name: "Valley Sweetened Condensed Milk", quantity: 100, minQuantity: 30, dailySales: 4, expirationDate: getOffsetDate(180) }
   ];
 }
 
@@ -60,13 +60,14 @@ function saveToLocalStorage() {
 }
 
 // ----------------------------------------------------
-// 2. Core Priority Engine
+// 2. Core Priority Engine & Run-Out Forecast (DOI) Logic
 // ----------------------------------------------------
 function runPriorityEngine(items) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   return items.map(item => {
+    // Expiration date parsing
     let expDate;
     if (item.expirationDate && typeof item.expirationDate === 'string' && item.expirationDate.includes('-')) {
       const [year, month, day] = item.expirationDate.split('-').map(Number);
@@ -83,6 +84,30 @@ function runPriorityEngine(items) {
     const isExpiringSoon = daysLeft > 0 && daysLeft <= 7;
     const isLowStock = Number(item.quantity) <= Number(item.minQuantity);
 
+    // --- RUN-OUT FORECAST (DOI) CALCULATION ---
+    const qty = Number(item.quantity) || 0;
+    let dailyRate = Number(item.dailySales);
+
+    // Fallback daily consumption rate if not explicitly supplied
+    if (!dailyRate || dailyRate <= 0) {
+      dailyRate = item.minQuantity ? Math.max(1, Math.round(item.minQuantity / 5)) : 2;
+    }
+
+    const doiDays = dailyRate > 0 ? Math.floor(qty / dailyRate) : 999;
+    
+    // Projected Stockout Date
+    const runOutDateObj = new Date(today);
+    runOutDateObj.setDate(runOutDateObj.getDate() + doiDays);
+    const runOutDateStr = `${runOutDateObj.getMonth() + 1}/${runOutDateObj.getDate()}/${runOutDateObj.getFullYear()}`;
+
+    let doiStatus = 'SAFE'; // SAFE (>7 days)
+    if (doiDays <= 3) {
+      doiStatus = 'CRITICAL'; // CRITICAL (<= 3 days)
+    } else if (doiDays <= 7) {
+      doiStatus = 'WARNING';  // WARNING (4-7 days)
+    }
+
+    // Assign overall inventory tier
     let status = null;
     let tier = null;
 
@@ -100,7 +125,16 @@ function runPriorityEngine(items) {
       tier = 3;
     }
 
-    return { ...item, daysLeft, status, tier };
+    return { 
+      ...item, 
+      daysLeft, 
+      status, 
+      tier, 
+      dailySales: dailyRate, 
+      doiDays, 
+      doiStatus, 
+      runOutDateStr 
+    };
   });
 }
 
@@ -114,6 +148,7 @@ function renderMetrics(processedItems) {
   const criticalCount = processedItems.filter(i => i.tier === 1).length;
   const warningCount = processedItems.filter(i => i.tier === 2 || i.tier === 3).length;
   const healthyCount = processedItems.filter(i => i.tier === null).length;
+  const runOutCount = processedItems.filter(i => i.doiStatus === 'CRITICAL' || i.doiStatus === 'WARNING').length;
 
   metricsContainer.innerHTML = `
     <div class="metric-card critical ${currentFilter === 'critical' ? 'active' : ''}" onclick="setFilter('critical')">
@@ -127,6 +162,10 @@ function renderMetrics(processedItems) {
     <div class="metric-card healthy ${currentFilter === 'healthy' ? 'active' : ''}" onclick="setFilter('healthy')">
       <span class="metric-value">${healthyCount}</span>
       <span class="metric-label">Healthy Stock</span>
+    </div>
+    <div class="metric-card runout ${currentFilter === 'runout' ? 'active' : ''}" onclick="setFilter('runout')">
+      <span class="metric-value">${runOutCount}</span>
+      <span class="metric-label">Run-Out Risk</span>
     </div>
   `;
 }
@@ -155,11 +194,13 @@ function renderDashboard() {
     itemsToDisplay = allProcessed.filter(i => i.tier === 2 || i.tier === 3);
   } else if (currentFilter === 'healthy') {
     itemsToDisplay = allProcessed.filter(i => i.tier === null);
+  } else if (currentFilter === 'runout') {
+    itemsToDisplay = allProcessed.filter(i => i.doiStatus === 'CRITICAL' || i.doiStatus === 'WARNING');
   } else {
-    itemsToDisplay = allProcessed.filter(i => i.tier !== null);
+    itemsToDisplay = allProcessed.filter(i => i.tier !== null || i.doiStatus === 'CRITICAL');
   }
 
-  itemsToDisplay.sort((a, b) => (a.tier || 4) - (b.tier || 4) || a.daysLeft - b.daysLeft);
+  itemsToDisplay.sort((a, b) => (a.tier || 4) - (b.tier || 4) || a.doiDays - b.doiDays || a.daysLeft - b.daysLeft);
 
   if (itemsToDisplay.length === 0) {
     let emptyTitle = "All Stock Healthy";
@@ -174,6 +215,9 @@ function renderDashboard() {
     } else if (currentFilter === 'healthy') {
       emptyTitle = "No Healthy Items";
       emptySub = "All items currently require attention.";
+    } else if (currentFilter === 'runout') {
+      emptyTitle = "No Run-Out Risks";
+      emptySub = "All items have sufficient inventory for the coming week.";
     }
 
     dashboardContainer.innerHTML = `
@@ -230,7 +274,19 @@ function createCardElement(item) {
   const badgeText = item.status ? statusMap[item.status] : 'Healthy';
   const badgeClass = item.status ? `badge-${item.status}` : 'badge-HEALTHY';
 
-  const actionBtnHtml = item.tier !== null 
+  // Run-Out Badge Styling & Text
+  let doiBadgeText = `${item.doiDays} Days Stock Left`;
+  let doiBadgeClass = 'badge-runout-safe';
+
+  if (item.doiStatus === 'CRITICAL') {
+    doiBadgeText = `⚠️ Stockout in ${item.doiDays}d (${item.runOutDateStr})`;
+    doiBadgeClass = 'badge-runout-critical';
+  } else if (item.doiStatus === 'WARNING') {
+    doiBadgeText = `⚡ Stockout in ${item.doiDays}d (${item.runOutDateStr})`;
+    doiBadgeClass = 'badge-runout-warning';
+  }
+
+  const actionBtnHtml = (item.tier !== null || item.doiStatus === 'CRITICAL')
     ? `<button class="action-btn" onclick="handleQuickAction(${item.id})">Resolve</button>` 
     : '';
 
@@ -244,9 +300,10 @@ function createCardElement(item) {
       <div class="card-header">
         <span class="item-name">${item.name}</span>
         <span class="badge ${badgeClass}">${badgeText}</span>
+        <span class="badge ${doiBadgeClass}">${doiBadgeText}</span>
       </div>
       <div class="meta-text">
-        <span>${expiryText}</span> • Stock: <span>${displayQty}</span> (Min: ${displayMinQty})
+        <span>${expiryText}</span> • Stock: <span>${displayQty}</span> (Min: ${displayMinQty}) • Usage: <span>${item.dailySales}/day</span>
       </div>
     </div>
     ${actionBtnHtml}
@@ -269,11 +326,14 @@ if (addItemForm) {
   addItemForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
+    const dailyVal = document.getElementById('item-daily').value;
+
     const newItem = {
       id: Date.now(),
       name: document.getElementById('item-name').value.trim(),
       quantity: Number(document.getElementById('item-qty').value),
       minQuantity: Number(document.getElementById('item-min').value),
+      dailySales: dailyVal ? Number(dailyVal) : 0,
       expirationDate: document.getElementById('item-exp').value
     };
 
@@ -398,6 +458,7 @@ function parseAndImportCSV(csvText) {
   const expIdx = headers.findIndex(h => h.includes('expiration date') || h === 'expiration date' || h === 'expirationdate');
   const qtyIdx = headers.findIndex(h => h.includes('quantity in stock') || h === 'quantity in stock' || h === 'quantity');
   const minIdx = headers.findIndex(h => h.includes('minimum stock threshold') || h === 'minimum stock threshold' || h === 'minquantity');
+  const soldIdx = headers.findIndex(h => h.includes('quantity_sold') || h.includes('sold'));
 
   if (nameIdx === -1 || expIdx === -1 || qtyIdx === -1 || minIdx === -1) {
     alert('Missing required headers. CSV must contain:\n- Product Name\n- Expiration Date\n- Quantity in Stock\n- Minimum Stock Threshold');
@@ -421,6 +482,8 @@ function parseAndImportCSV(csvText) {
     const quantity = Number(row[qtyIdx]);
     const minQuantity = Number(row[minIdx]);
     const expDateStr = row[expIdx];
+    const soldQty = soldIdx !== -1 ? Number(row[soldIdx]) : 0;
+    const dailySales = soldQty > 0 ? Math.round((soldQty / 30) * 10) / 10 : Math.max(1, Math.round(minQuantity / 5));
 
     if (fullProductName && expDateStr && !isNaN(quantity) && !isNaN(minQuantity)) {
       if (productMap.has(fullProductName)) {
@@ -437,6 +500,7 @@ function parseAndImportCSV(csvText) {
           name: fullProductName,
           quantity: Math.round(quantity * 100) / 100,
           minQuantity: Math.round(minQuantity * 100) / 100,
+          dailySales: dailySales,
           expirationDate: expDateStr
         });
       }
@@ -454,7 +518,7 @@ function parseAndImportCSV(csvText) {
   saveToLocalStorage();
   renderDashboard();
 
-  alert(`Successfully loaded ${newItems.length} unique products into FreshStock!`);
+  alert(`Successfully loaded ${newItems.length} unique products into FreshStock with Run-Out Forecast calculations!`);
 }
 
 // Initial Execution

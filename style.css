@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1040px;
   margin: 0 auto;
 }
 
@@ -31,10 +31,10 @@ body {
   margin-top: 4px;
 }
 
-/* Metrics Bar */
+/* Metrics Bar (Updated to 4 columns for Run-Out Metric) */
 .metrics-bar {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-bottom: 24px;
 }
@@ -70,9 +70,10 @@ body {
 .metric-card.critical .metric-value { color: #e74c3c; }
 .metric-card.warning .metric-value { color: #f39c12; }
 .metric-card.healthy .metric-value { color: #27ae60; }
+.metric-card.runout .metric-value { color: #8e44ad; }
 
 .metric-label {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: #7f8c8d;
   text-transform: uppercase;
@@ -142,7 +143,7 @@ body {
 
 .item-form {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr auto;
   gap: 10px;
 }
 
@@ -208,8 +209,9 @@ body {
 .card-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   margin-bottom: 6px;
+  flex-wrap: wrap;
 }
 
 .item-name {
@@ -225,14 +227,21 @@ body {
   text-transform: uppercase;
 }
 
+/* Expiration / Stock Badges */
 .badge-EXPIRED, .badge-BOTH { background-color: #fde8e8; color: #e74c3c; }
 .badge-EXPIRING_SOON { background-color: #fef5e7; color: #f39c12; }
 .badge-LOW_STOCK { background-color: #fef5e7; color: #e67e22; }
 .badge-HEALTHY { background-color: #eafaf1; color: #27ae60; }
 
+/* Run-Out Forecast Badges */
+.badge-runout-critical { background-color: #f5eeed; color: #8e44ad; border: 1px solid #d2b4de; }
+.badge-runout-warning { background-color: #fcf3cf; color: #b7950b; border: 1px solid #f9e79f; }
+.badge-runout-safe { background-color: #ebf5fb; color: #2980b9; }
+
 .meta-text {
   font-size: 0.85rem;
   color: #64748b;
+  line-height: 1.4;
 }
 
 .action-btn {
@@ -258,7 +267,7 @@ body {
   color: #64748b;
 }
 
-@media (max-width: 768px) {
-  .metrics-bar { grid-template-columns: 1fr; }
+@media (max-width: 850px) {
+  .metrics-bar { grid-template-columns: repeat(2, 1fr); }
   .item-form { grid-template-columns: 1fr; }
 }

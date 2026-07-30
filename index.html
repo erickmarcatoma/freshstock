@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FreshStock - Smart Inventory Dashboard</title>
 
-  <!-- 🟢 Tab Icon (Replaces default browser globe) -->
+  <!-- 🟢 Tab Icon -->
   <link rel="icon" type="image/png" href="fresh.png" />
 
   <link rel="stylesheet" href="style.css" />
@@ -14,10 +14,10 @@
   <div class="container">
     <header class="app-header">
       <h1>FreshStock Dashboard</h1>
-      <p class="subtitle">Real-time dairy inventory monitoring & alert engine</p>
+      <p class="subtitle">Real-time dairy inventory monitoring & run-out forecast engine</p>
     </header>
 
-    <!-- Metrics Bar (Clickable Filters) -->
+    <!-- Metrics Bar (Clickable Filters: Critical, Warnings, Healthy, Run-Out Risk) -->
     <section id="metrics-bar" class="metrics-bar"></section>
 
     <!-- CSV Upload & Remove Zone -->
@@ -33,13 +33,14 @@
       </div>
     </section>
 
-    <!-- Manual Item Entry Form -->
+    <!-- Manual Item Entry Form (Includes Daily Usage field for Run-Out Forecast) -->
     <section class="form-section">
       <h2>Add Inventory Item</h2>
       <form id="add-item-form" class="item-form">
         <input type="text" id="item-name" placeholder="Product Name" required />
         <input type="number" id="item-qty" placeholder="Quantity" step="any" required />
         <input type="number" id="item-min" placeholder="Min Threshold" step="any" required />
+        <input type="number" id="item-daily" placeholder="Daily Usage (Opt)" step="any" />
         <input type="date" id="item-exp" required />
         <button type="submit" class="submit-btn">Add SKU</button>
       </form>
