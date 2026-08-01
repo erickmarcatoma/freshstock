@@ -6,10 +6,39 @@ document.addEventListener("DOMContentLoaded", () => {
   let inventory = [];
   let currentFilter = "all";
 
+  // Pre-loaded Demo Dataset for Instant Portfolio Testing
+  const SAMPLE_DEMO_DATA = [
+    { id: 101, name: "Valley Whole Milk 1 Gal", category: "Dairy", quantity: 8, rate: 1, expDate: getFutureDate(8) },
+    { id: 102, name: "Valley 2% Reduced Fat Milk 1 Gal", category: "Dairy", quantity: 5, rate: 1, expDate: getFutureDate(5) },
+    { id: 103, name: "Valley Heavy Cream 40% 1 Qt", category: "Dairy", quantity: 12, rate: 2, expDate: getFutureDate(6) },
+    { id: 104, name: "Northwood Peach Yogurt 6oz", category: "Dairy", quantity: 4, rate: 1, expDate: getFutureDate(2) },
+    { id: 105, name: "Great Lakes Shredded Mozzarella 16oz", category: "Dairy", quantity: 2, rate: 1, expDate: getFutureDate(1) },
+    { id: 106, name: "Midwest Eggnog 1/2 Gal", category: "Dairy", quantity: 0, rate: 1, expDate: getFutureDate(-2) },
+    { id: 107, name: "Artisanal Sourdough Bread", category: "Bakery", quantity: 10, rate: 3, expDate: getFutureDate(4) }
+  ];
+
   initApp();
 
   function initApp() {
-    loadFromLocalStorage();
+    const urlParams = new URLSearchParams(window.location.search);
+    const isDemo = urlParams.get("demo") === "true";
+    const isFresh = urlParams.get("fresh") === "true";
+
+    if (isDemo) {
+      // 1. Explicit Demo Mode: Load sample data
+      inventory = [...SAMPLE_DEMO_DATA];
+      saveToLocalStorage();
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (isFresh) {
+      // 2. Explicit Live Mode: Start completely empty
+      inventory = [];
+      localStorage.removeItem("freshstock_inventory");
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else {
+      // 3. Regular Reload: Load existing local storage or default to empty
+      loadFromLocalStorage();
+    }
+
     setupNavigation();
     setupEventListeners();
     renderAll();
@@ -183,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (daysUntilExp <= 3 && item.quantity > 0) expiringCount++;
 
-      // Refined Classification Logic
+      // Health Classification Logic
       if (item.quantity === 0 || daysOfSupply <= 2 || daysUntilExp <= 2) {
         criticalCount++;
       } else if (daysOfSupply <= 6 || daysUntilExp <= 5) {
@@ -193,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Update Top Metric Strip Counters
+    // Update Metric Strip Counters
     document.getElementById("total-items-val").textContent = total;
     document.getElementById("low-stock-val").textContent = lowCount;
     document.getElementById("expiring-val").textContent = expiringCount;
@@ -204,16 +233,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("nav-alerts-badge").textContent = totalAlerts;
     document.getElementById("topbar-notif-badge").textContent = totalAlerts;
 
-    // Weighted Health Calculation
+    // Health Score Math
     const penalty = ((criticalCount * 1.0) + (moderateCount * 0.4)) / total;
     const healthScore = Math.max(0, Math.round((1 - penalty) * 100));
 
-    // Percentages for Legend & Donut Chart
+    // Percentages for Donut Widget
     const healthyPct = Math.round((healthyCount / total) * 100);
     const moderatePct = Math.round((moderateCount / total) * 100);
     const criticalPct = Math.max(0, 100 - healthyPct - moderatePct);
 
-    // Dynamic UI Updates
+    // Dynamic UI Status Text
     const percentEl = document.getElementById("health-percent");
     const statusEl = document.getElementById("health-status-text");
     const summaryEl = document.getElementById("health-summary-text");
@@ -238,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("legend-low-val").textContent = `${moderatePct}%`;
     document.getElementById("legend-bad-val").textContent = `${criticalPct}%`;
 
-    // Render Multi-Color Conic Gradient Donut
+    // Conic Gradient Ring Render
     const donut = document.getElementById("health-donut");
     donut.style.background = `conic-gradient(
       #10b981 0% ${healthyPct}%, 
@@ -352,7 +381,6 @@ document.addEventListener("DOMContentLoaded", () => {
       detailText = `<div class="exp-date">${item.expDate}</div><div class="sub-text">${diffDays} days left</div>`;
     }
 
-    // Default category fallback to prevent layout breaks
     const categoryName = item.category && item.category.trim() !== "" ? item.category : "Dairy";
 
     return `
