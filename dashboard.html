@@ -1,61 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FreshStock - Smart Inventory Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshStock - Dashboard</title>
 
-  <!-- Tab Icon -->
-  <link rel="icon" type="image/png" href="fresh.png" />
-
-  <!-- Dashboard CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <!-- Browser Tab Favicon -->
+  <link rel="icon" type="image/png" href="fresh.png">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    
-    <!-- Clean Back Navigation -->
-    <nav class="nav-back-container">
-      <a href="index.html" class="back-link">← Back to Main Page</a>
-    </nav>
 
-    <!-- App Header -->
-    <header class="app-header">
-      <h1>FreshStock Dashboard</h1>
-      <p class="subtitle">Real-time dairy inventory monitoring & run-out forecast engine</p>
-    </header>
+  <div class="app-layout">
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-brand">
+          <!-- Favicon logo image -->
+          <img src="fresh.png" alt="FreshStock Icon" class="brand-logo-img" />
+          <span class="brand-name">FreshStock</span>
+        </div>
 
-    <!-- Metrics Bar (Filter Cards) -->
-    <section id="metrics-bar" class="metrics-bar"></section>
+        <nav class="sidebar-nav">
+          <a href="#dashboard" class="nav-item active" data-tab="dashboard">
+            <span class="nav-icon">📊</span> Dashboard
+          </a>
+          <a href="#inventory" class="nav-item" data-tab="inventory">
+            <span class="nav-icon">📦</span> Inventory
+          </a>
+          <a href="#alerts" class="nav-item" data-tab="alerts">
+            <span class="nav-icon">🔔</span> Alerts
+            <span class="nav-badge" id="nav-alerts-badge">0</span>
+          </a>
+          <a href="#add-item" class="nav-item" data-tab="add-item">
+            <span class="nav-icon">➕</span> Add Item
+          </a>
+          <a href="#reports" class="nav-item" data-tab="reports">
+            <span class="nav-icon">📄</span> Reports
+          </a>
+          <a href="#settings" class="nav-item" data-tab="settings">
+            <span class="nav-icon">⚙️</span> Settings
+          </a>
+        </nav>
+      </div>
 
-    <!-- CSV Upload & Remove Dropzone -->
-    <section class="upload-section">
-      <div id="drop-zone" class="drop-zone">
-        <p id="drop-zone-text">Drag & drop your CSV file here or <strong>click to browse</strong></p>
-        <input type="file" id="csv-file-input" accept=".csv" style="display: none;" />
-        
-        <div id="file-info" class="file-info" style="display: none;">
-          <span id="uploaded-file-name">filename.csv</span>
-          <button type="button" id="remove-file-btn" class="remove-btn">Remove CSV</button>
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-icon">?</div>
+          <div class="help-text">
+            <strong>Need help?</strong>
+            <span>Visit our help center</span>
+          </div>
+        </div>
+
+        <div class="user-profile">
+          <div class="user-avatar">E</div>
+          <div class="user-info">
+            <span class="user-name">Erick</span>
+            <span class="user-role">Admin</span>
+          </div>
+          <span class="profile-arrow">⌄</span>
         </div>
       </div>
-    </section>
+    </aside>
 
-    <!-- Manual Item Intake Form -->
-    <section class="form-section">
-      <h2>Add Inventory Item</h2>
-      <form id="add-item-form" class="item-form">
-        <input type="text" id="item-name" placeholder="Product Name" required />
-        <input type="number" id="item-qty" placeholder="Quantity" step="any" required />
-        <input type="number" id="item-min" placeholder="Min Threshold" step="any" required />
-        <input type="number" id="item-daily" placeholder="Daily Usage (Opt)" step="any" />
-        <input type="date" id="item-exp" required />
-        <button type="submit" class="submit-btn">Add SKU</button>
-      </form>
-    </section>
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Bar: Search & Notifications -->
+      <header class="top-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="global-search" placeholder="Search items or categories..." />
+        </div>
+        <div class="notification-btn">
+          <span class="notif-icon">🔔</span>
+          <span class="notif-text">Notifications</span>
+          <span class="notif-badge" id="topbar-notif-badge">0</span>
+        </div>
+      </header>
 
-    <!-- Main Inventory SKU Cards Grid -->
-    <main id="dashboard" class="dashboard-container"></main>
+      <!-- VIEW 1: DASHBOARD -->
+      <section id="view-dashboard" class="tab-view active">
+        <div class="dashboard-header">
+          <h1>Dashboard</h1>
+          <p>Real-time overview of your inventory and alerts</p>
+        </div>
+
+        <!-- Metric Stat Cards (Clickable Quick Filters) -->
+        <div class="metrics-grid">
+          <div class="stat-card clickable active-filter" data-filter="all">
+            <div class="stat-info">
+              <span class="stat-title">Total Items</span>
+              <span class="stat-number" id="total-items-val">0</span>
+              <span class="stat-trend positive">Show all stock</span>
+            </div>
+            <div class="stat-icon-bg green-bg">📄</div>
+          </div>
+
+          <div class="stat-card clickable" data-filter="low">
+            <div class="stat-info">
+              <span class="stat-title">Low Stock</span>
+              <span class="stat-number" id="low-stock-val">0</span>
+              <span class="stat-trend warning">Show low stock</span>
+            </div>
+            <div class="stat-icon-bg orange-bg">📦</div>
+          </div>
+
+          <div class="stat-card clickable" data-filter="expiring">
+            <div class="stat-info">
+              <span class="stat-title">Expiring Soon</span>
+              <span class="stat-number" id="expiring-val">0</span>
+              <span class="stat-trend danger">Show expiring</span>
+            </div>
+            <div class="stat-icon-bg red-bg">🚨</div>
+          </div>
+
+          <div class="stat-card clickable" data-filter="out">
+            <div class="stat-info">
+              <span class="stat-title">Out of Stock</span>
+              <span class="stat-number" id="out-val">0</span>
+              <span class="stat-trend neutral">Show 0 qty</span>
+            </div>
+            <div class="stat-icon-bg gray-bg">⭕</div>
+          </div>
+        </div>
+
+        <!-- Dashboard Grid Layout -->
+        <div class="dashboard-body-grid">
+          <!-- Stock Alerts Table Panel -->
+          <div class="panel table-panel">
+            <div class="panel-header">
+              <h2 id="alerts-table-title">Stock Alerts</h2>
+            </div>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Expires / Stock</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-alerts-tbody">
+                <!-- Rendered dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Inventory Health Chart Widget Panel -->
+          <div class="panel health-panel">
+            <h2>Inventory Health</h2>
+
+            <div class="donut-chart-wrapper">
+              <div class="donut-chart" id="health-donut">
+                <div class="chart-center">
+                  <span class="chart-percent" id="health-percent">100%</span>
+                  <span class="chart-label" id="health-status-text">Optimal</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="health-summary" id="health-summary-text">Your inventory is in great shape!</p>
+
+            <div class="health-legend">
+              <div class="legend-item">
+                <span class="dot dot-green"></span>
+                <span class="legend-name">Good Stock</span>
+                <span class="legend-val" id="legend-good-val">0%</span>
+              </div>
+              <div class="legend-item">
+                <span class="dot dot-orange"></span>
+                <span class="legend-name">Low Stock</span>
+                <span class="legend-val" id="legend-low-val">0%</span>
+              </div>
+              <div class="legend-item">
+                <span class="dot dot-red"></span>
+                <span class="legend-name">Out / Expired</span>
+                <span class="legend-val" id="legend-bad-val">0%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: FULL INVENTORY -->
+      <section id="view-inventory" class="tab-view hidden">
+        <div class="dashboard-header">
+          <h1>Full Inventory</h1>
+          <p>View, manage, and remove active items in your local database</p>
+        </div>
+        <div class="panel">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Daily Usage</th>
+                <th>Expiration</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="full-inventory-tbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- VIEW 3: ALERTS -->
+      <section id="view-alerts" class="tab-view hidden">
+        <div class="dashboard-header">
+          <h1>Stock Alerts & Critical Items</h1>
+          <p>Filtered view for items requiring immediate attention</p>
+        </div>
+        <div class="panel">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Details</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="all-alerts-tbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- VIEW 4: ADD ITEM & CSV -->
+      <section id="view-add-item" class="tab-view hidden">
+        <div class="dashboard-header">
+          <h1>Add & Import Stock</h1>
+          <p>Add individual items manually or upload a bulk CSV file</p>
+        </div>
+
+        <div class="controls-grid">
+          <!-- CSV Upload -->
+          <div class="panel">
+            <h2>Import via CSV</h2>
+            <div id="drop-zone" class="drop-zone">
+              <div class="drop-zone-text">
+                <div class="drop-icon">📁</div>
+                <strong>Drag & drop CSV file here</strong>
+                <p>Format: Name, Category, Quantity, DailyRate, ExpirationDate</p>
+              </div>
+              <input type="file" id="csv-file-input" accept=".csv" style="display: none;" />
+            </div>
+          </div>
+
+          <!-- Manual Form -->
+          <div class="panel">
+            <h2>Manual Add Item</h2>
+            <form id="add-item-form" class="form-grid">
+              <div class="form-group full-width">
+                <label>Item Name</label>
+                <input type="text" id="item-name" required placeholder="e.g. Fresh Milk 1L" />
+              </div>
+              <div class="form-group">
+                <label>Category</label>
+                <input type="text" id="item-category" required placeholder="e.g. Dairy" />
+              </div>
+              <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" id="item-qty" required min="0" value="10" />
+              </div>
+              <div class="form-group">
+                <label>Daily Usage Rate</label>
+                <input type="number" id="item-rate" required min="1" value="2" />
+              </div>
+              <div class="form-group">
+                <label>Expiration Date</label>
+                <input type="date" id="item-exp" required />
+              </div>
+              <button type="submit" class="submit-btn">Add Stock Item</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: REPORTS -->
+      <section id="view-reports" class="tab-view hidden">
+        <div class="dashboard-header">
+          <h1>Reports & Export</h1>
+          <p>Download active session records</p>
+        </div>
+        <div class="panel">
+          <h2>Export Local Inventory</h2>
+          <p class="sub-text" style="margin-bottom: 20px;">Download a complete CSV spreadsheet of your current session inventory data.</p>
+          <button id="export-csv-btn" class="submit-btn" style="width: auto; padding: 10px 24px;">Export to CSV</button>
+        </div>
+      </section>
+
+      <!-- VIEW 6: SETTINGS -->
+      <section id="view-settings" class="tab-view hidden">
+        <div class="dashboard-header">
+          <h1>Settings & Data Control</h1>
+          <p>Manage browser local memory</p>
+        </div>
+        <div class="panel">
+          <h2>Local Storage Reset</h2>
+          <p class="sub-text" style="margin-bottom: 20px;">Clear all stored inventory records from your local storage memory.</p>
+          <button id="reset-session-btn" class="btn-outline-sm" style="color: #ef4444; border-color: #fca5a5;">Clear All Data</button>
+        </div>
+      </section>
+    </main>
   </div>
 
   <script src="script.js"></script>
