@@ -1,7 +1,4 @@
-/* ====================================================
-   Landing Page Styles (landing.css)
-   ==================================================== */
-
+/* Reset & General Landing Setup */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,399 +6,181 @@
 }
 
 .landing-body {
-  background-color: #f8fafc;
-  background-image: 
-    linear-gradient(to right, rgba(203, 213, 225, 0.4) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(203, 213, 225, 0.4) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-  line-height: 1.6;
 }
 
-/* Navigation Bar */
-.navbar {
+/* Header Navigation */
+.landing-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 32px;
-  max-width: 1040px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 24px 32px;
 }
 
-.logo {
+.brand-logo-container {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: #1a252f;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #10b981;
 }
 
-.nav-logo {
+.brand-logo-container img {
   width: 32px;
   height: 32px;
-}
-
-.cta-btn-nav {
-  background-color: #2bb673;
-  color: white;
-  padding: 8px 18px;
   border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
+  object-fit: contain;
 }
 
-.cta-btn-nav:hover {
-  background-color: #249960;
+.btn-launch {
+  background: #10b981;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-launch:hover {
+  background: #059669;
+  transform: translateY(-1px);
 }
 
 /* Hero Section */
 .hero-section {
+  max-width: 900px;
+  margin: 80px auto 60px;
   text-align: center;
-  padding: 60px 20px 80px 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.hero-content h1 {
-  font-size: 2.8rem;
-  color: #1a252f;
-  margin-bottom: 16px;
-  line-height: 1.2;
+.hero-badge {
+  display: inline-block;
+  background: #ecfdf5;
+  color: #047857;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #a7f3d0;
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1.15;
+  color: #0f172a;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: #64748b;
-  margin-bottom: 28px;
+  max-width: 680px;
+  margin: 0 auto 36px;
   line-height: 1.6;
 }
 
-.hero-buttons {
+.hero-actions {
   display: flex;
-  gap: 16px;
   justify-content: center;
+  gap: 16px;
 }
 
-/* Buttons */
-.btn {
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: 600;
+.btn-primary-launch {
+  background: #10b981;
+  color: #ffffff;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 700;
   text-decoration: none;
-  display: inline-block;
+  font-size: 1rem;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
   transition: all 0.2s ease;
 }
 
-.btn-primary {
-  background-color: #3498db;
-  color: white;
+.btn-primary-launch:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
-.btn-primary:hover {
-  background-color: #2980b9;
-}
-
-.btn-secondary {
-  background-color: #e2e8f0;
-  color: #2c3e50;
-}
-
-.btn-secondary:hover {
-  background-color: #cbd5e1;
-}
-
-.btn-large {
-  font-size: 1.1rem;
-  padding: 14px 28px;
-}
-
-/* ====================================================
-   Impact Stats Strip
-   ==================================================== */
-
-.stats-strip {
-  max-width: 900px;
-  margin: -35px auto 40px auto;
-  padding: 0 20px;
-}
-
-.stats-container {
+.btn-secondary-launch {
   background: #ffffff;
-  border-radius: 12px;
-  padding: 24px 32px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e2e8f0;
-}
-
-.stat-item {
-  text-align: center;
-  flex: 1;
-}
-
-.stat-number {
-  display: block;
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #2bb673;
-  margin-bottom: 4px;
-}
-
-.stat-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.stat-divider {
-  width: 1px;
-  height: 40px;
-  background-color: #e2e8f0;
-}
-
-/* Content Sections & Features Grid */
-.info-section, .try-section {
-  max-width: 1040px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.info-section h2, .try-section h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 32px;
-  color: #1a252f;
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-.info-card {
-  background: white;
-  padding: 24px;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 12px 28px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
-.card-icon {
-  font-size: 2rem;
-  margin-bottom: 12px;
-}
-
-.info-card h3 {
-  margin-bottom: 10px;
-  color: #2c3e50;
-}
-
-.info-card p {
-  color: #64748b;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-/* ====================================================
-   CSV Upload Guide & Accordion Section
-   ==================================================== */
-
-.csv-guide-section {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 0 20px;
-}
-
-.csv-guide-container h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  color: #1a252f;
-  margin-bottom: 8px;
-}
-
-.section-subtitle {
-  text-align: center;
-  color: #64748b;
-  margin-bottom: 24px;
-}
-
-/* Accordion */
-.accordion-item {
-  background: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  overflow: hidden;
-}
-
-.accordion-header {
-  padding: 18px 24px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #1a252f;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-  user-select: none;
-}
-
-.accordion-header::-webkit-details-marker {
-  display: none;
-}
-
-details[open] .accordion-header {
-  border-bottom: 1px solid #e2e8f0;
-  background-color: #f8fafc;
-}
-
-details[open] .icon {
-  transform: rotate(45deg);
-}
-
-.icon {
-  font-size: 1.3rem;
-  transition: transform 0.2s ease;
-  color: #64748b;
-}
-
-.accordion-content {
-  padding: 24px;
-}
-
-/* Table Styling */
-.csv-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 16px 0;
-  font-size: 0.95rem;
-}
-
-.csv-table th, .csv-table td {
-  padding: 12px 14px;
-  text-align: left;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.csv-table th {
-  background-color: #f8fafc;
-  color: #475569;
-  font-weight: 600;
-}
-
-.csv-table code {
-  background: #f1f5f9;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: monospace;
-  color: #0f172a;
-}
-
-/* Tags */
-.tag {
-  font-size: 0.75rem;
   font-weight: 700;
-  padding: 3px 8px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary-launch:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+
+/* Key Value Pillars */
+.features-grid {
+  max-width: 1100px;
+  margin: 80px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  padding: 0 20px;
+}
+
+.feature-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
-  text-transform: uppercase;
+  padding: 32px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.tag-required {
-  background-color: #fef2f2;
-  color: #ef4444;
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: #cbd5e1;
 }
 
-.tag-optional {
-  background-color: #f0fdf4;
-  color: #16a34a;
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: inline-block;
 }
 
-/* Example Box */
-.csv-example-box {
-  margin-top: 20px;
-  background: #1e293b;
-  color: #f8fafc;
-  padding: 16px;
-  border-radius: 8px;
-}
-
-.example-title {
-  display: block;
-  font-size: 0.85rem;
-  color: #94a3b8;
+.feature-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
   margin-bottom: 8px;
-  font-weight: 600;
 }
 
-.csv-example-box pre {
-  margin: 0;
-  overflow-x: auto;
-}
-
-.csv-example-box code {
-  font-family: monospace;
+.feature-desc {
   font-size: 0.9rem;
+  color: #64748b;
   line-height: 1.5;
-  color: #38bdf8;
-}
-
-.step-list {
-  max-width: 550px;
-  margin: 0 auto 30px auto;
-  line-height: 1.8;
-  color: #2c3e50;
-  text-align: center;
-}
-
-.center-btn {
-  text-align: center;
 }
 
 /* Footer */
-footer {
+.landing-footer {
+  border-top: 1px solid #e2e8f0;
   text-align: center;
-  padding: 40px 20px 30px;
+  padding: 32px 20px;
   color: #94a3b8;
   font-size: 0.85rem;
-}
-
-/* Mobile Responsive Tweaks */
-@media (max-width: 650px) {
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-  }
-  
-  .navbar {
-    padding: 16px 20px;
-  }
-
-  .stats-container {
-    flex-direction: column;
-    gap: 20px;
-    padding: 24px 16px;
-  }
-
-  .stat-divider {
-    width: 80%;
-    height: 1px;
-  }
-
-  .csv-table th, .csv-table td {
-    padding: 8px 10px;
-    font-size: 0.85rem;
-  }
+  background: #ffffff;
+  margin-top: 80px;
 }

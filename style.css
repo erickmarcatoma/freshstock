@@ -53,6 +53,17 @@ body {
   padding-bottom: 24px;
 }
 
+.logo-home-btn {
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.logo-home-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.01);
+}
+
 .brand-logo-img {
   width: 28px;
   height: 28px;
@@ -358,7 +369,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
-  table-layout: auto; /* Natural content fitting */
+  table-layout: auto;
 }
 
 .data-table th,
@@ -382,18 +393,18 @@ body {
 }
 
 /* Balanced Column Width Ratios */
-.data-table th:nth-child(1), .data-table td:nth-child(1) { width: 38%; } /* ITEM */
-.data-table th:nth-child(2), .data-table td:nth-child(2) { width: 14%; white-space: nowrap; } /* CATEGORY */
-.data-table th:nth-child(3), .data-table td:nth-child(3) { width: 16%; white-space: nowrap; } /* STATUS */
-.data-table th:nth-child(4), .data-table td:nth-child(4) { width: 20%; white-space: nowrap; } /* EXPIRES / STOCK */
-.data-table th:nth-child(5), .data-table td:nth-child(5) { width: 12%; text-align: right; white-space: nowrap; } /* ACTION */
+.data-table th:nth-child(1), .data-table td:nth-child(1) { width: 38%; }
+.data-table th:nth-child(2), .data-table td:nth-child(2) { width: 14%; white-space: nowrap; }
+.data-table th:nth-child(3), .data-table td:nth-child(3) { width: 16%; white-space: nowrap; }
+.data-table th:nth-child(4), .data-table td:nth-child(4) { width: 20%; white-space: nowrap; }
+.data-table th:nth-child(5), .data-table td:nth-child(5) { width: 12%; text-align: right; white-space: nowrap; }
 
 /* Clean Item Title & Tag Typography */
 .item-title {
   font-weight: 600;
   color: #0f172a;
   display: block;
-  word-wrap: break-word; /* Allows full titles to render without cutoff */
+  word-wrap: break-word;
 }
 
 .category-tag {
